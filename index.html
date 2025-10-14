@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VIBE LIVE CLUB - Explosive Glitch</title>
+
+<!-- 引入 Ubuntu Mono -->
+<link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap" rel="stylesheet">
+
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow-x: hidden;
+    background: #0a0014;
+    font-family: 'Ubuntu Mono', monospace;
+    color: white;
+  }
+
+  /* WebGL 背景 */
+  canvas#bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    z-index: 0;
+  }
+
+  /* 页面内容 */
+  .container {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 100px 20px 50px 20px;
+  }
+
+  .container h1 {
+    font-size: clamp(2.5em, 6vw, 4em);
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px #00f0ff, 0 0 20px #ff33c5;
+    margin-bottom: 10px;
+  }
+
+  .container p {
+    font-size: clamp(1em, 2vw, 1.2em);
+    text-shadow: 0 0 8px #00f0ff;
+    margin: 5px 0;
+  }
+
+  /* 三栏板块 */
+  .bottom-sections {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 80px;
+    width: 100%;
+    max-width: 1400px;
+    gap: 20px;
+  }
+
+  .section {
+    flex: 1 1 auto;
+    min-width: 280px;
+    max-width: 400px;
+    padding: 2em 1.5em;
+    text-align: center;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(10px) saturate(180%);
+    -webkit-backdrop-filter: blur(10px) saturate(180%);
+    border-radius: 20px;
+    border: 0.35px solid #ffffff;
+    color: #fff;
+    text-decoration: none;
+    transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .section:hover {
+    transform: translateY(-5px);
+    background: rgba(255,255,255,0.18);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+  }
+
+  .section h2 {
+    font-size: clamp(1.2em, 2vw, 1.5em);
+    margin-bottom: 10px;
+    color: #ffe600;
+  }
+
+  .section p {
+    font-size: clamp(0.9em, 1.5vw, 1em);
+    line-height: 1.4em;
+  }
+
+  a {
+    color: #00f0ff;
+    text-decoration: none;
+  }
+
+  /* Footer 固定在底部，带渐变模糊 */
+  footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding: 15px 0;
+    font-size: clamp(0.9em, 1.5vw, 1em);
+    z-index: 1;
+
+    /* 渐变 + 模糊效果 */
+    background: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0));
+    backdrop-filter: blur(12px) saturate(180%);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
+  }
+
+  @media (max-width: 768px) {
+    .bottom-sections {
+      flex-direction: column;
+      align-items: center;
+    }
+    .section {
+      width: 90%;
+      min-width: unset;
+      max-width: unset;
+    }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="bg"></canvas>
+
+<div class="container">
+  <h1>VIBE LIVE CLUB</h1>
+  <p>immersive sound · reactive visuals · live code</p>
+
+  <div class="bottom-sections">
+    <a class="section" href="https://strudel.vibelive.club/" target="_blank">
+      <h2>Strudel Vibelive Club</h2>
+      <p>Vibe live coding on the web using local LLM, a fork of strudel.</p>
+    </a>
+    <a class="section" href="https://github.com/VrchStudio/comfyui-web-viewer" target="_blank">
+      <h2>ComfyUI Web Viewer</h2>
+      <p>The ComfyUI Web Viewer by vrch.ai is a custom node collection for real-time AI-generated interactive art.</p>
+    </a>
+    <a class="section" href="https://www.vrch.io/aivj" target="_blank">
+      <h2>Agentic VJ</h2>
+      <p>How could AI revolutionize music performances and club scenes? Sign up to get latest info.</p>
+    </a>
+  </div>
+</div>
+
+<footer>
+  Contact us: <a href="mailto:hi@vrch.io">hi@vrch.io</a>
+</footer>
+
+<script>
+// ---------- WebGL 炸裂 Glitch 背景 ----------
+const canvas = document.getElementById('bg');
+const gl = canvas.getContext('webgl');
+if(!gl) alert("浏览器不支持 WebGL！");
+
+function resize(){
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  gl.viewport(0,0,gl.drawingBufferWidth,gl.drawingBufferHeight);
+}
+window.addEventListener('resize', resize);
+resize();
+
+const vsSource = `
+attribute vec2 a_position;
+varying vec2 v_uv;
+void main(){
+  v_uv = a_position*0.5+0.5;
+  gl_Position = vec4(a_position,0,1);
+}`;
+
+const fsSource = `
+precision highp float;
+varying vec2 v_uv;
+uniform float u_time;
+float rand(vec2 co){ return fract(sin(dot(co.xy, vec2(12.9898,78.233)))*43758.5453); }
+float noise(vec2 p){
+  vec2 i = floor(p); vec2 f = fract(p);
+  float a = rand(i); float b = rand(i+vec2(1.0,0.0));
+  float c = rand(i+vec2(0.0,1.0)); float d = rand(i+vec2(1.0,1.0));
+  vec2 u = f*f*(3.0-2.0*f);
+  return mix(a,b,u.x) + (c-a)*u.y*(1.0-u.x) + (d-b)*u.x*u.y;
+}
+vec2 glitch(vec2 uv,float t){
+  float maxOffset = 0.12;
+  float line = fract(uv.y*120.0 + t*25.0);
+  if(line > 0.8) uv.x += (rand(vec2(t,line))-0.5)*maxOffset*8.0;
+  if(rand(vec2(uv.y,t))>0.85) uv.x += (rand(uv)-0.5)*maxOffset*6.0;
+  if(rand(vec2(t,uv.y*10.0))>0.97) uv += vec2((rand(uv)-0.5)*0.15, (rand(uv)-0.5)*0.1);
+  uv.y += sin(t*20.0 + uv.x*50.0)*0.01;
+  return uv;
+}
+void main(){
+  vec2 uv = v_uv;
+  vec2 uvR = glitch(uv,u_time + 0.0);
+  vec2 uvG = glitch(uv,u_time + 1.0);
+  vec2 uvB = glitch(uv,u_time + 2.0);
+  vec2 posR = uvR*8.0; vec2 posG = uvG*8.0; vec2 posB = uvB*8.0;
+  float nR = sin(posR.x+u_time*1.5)+cos(posR.y+u_time*1.8)+noise(posR+u_time*0.9);
+  float nG = sin(posG.x+u_time*1.8)+cos(posG.y+u_time*1.2)+noise(posG+u_time*1.0);
+  float nB = sin(posB.x+u_time*1.3)+cos(posB.y+u_time*1.5)+noise(posB+u_time*1.1);
+  float r = 0.5 + 0.5*sin(nR + u_time*4.0);
+  float g = 0.5 + 0.5*sin(nG + u_time*4.5 + 2.0);
+  float b = 0.5 + 0.5*cos(nB + u_time*4.2);
+  float scan = smoothstep(0.97,1.0,fract(v_uv.y*500.0+u_time*60.0));
+  float glitchBlocks = step(0.93, rand(floor(v_uv*vec2(60.0,60.0))*u_time));
+  vec3 color = vec3(r,g,b) + scan*0.3 + glitchBlocks*0.35;
+  gl_FragColor = vec4(color,1.0);
+}`;
+
+function createShader(type,source){
+  const shader = gl.createShader(type);
+  gl.shaderSource(shader,source);
+  gl.compileShader(shader);
+  if(!gl.getShaderParameter(shader,gl.COMPILE_STATUS))
+    console.error(gl.getShaderInfoLog(shader));
+  return shader;
+}
+
+function createProgram(vs,fs){
+  const program = gl.createProgram();
+  gl.attachShader(program,vs);
+  gl.attachShader(program,fs);
+  gl.linkProgram(program);
+  if(!gl.getProgramParameter(program,gl.LINK_STATUS))
+    console.error(gl.getProgramInfoLog(program));
+  return program;
+}
+
+const vertexShader = createShader(gl.VERTEX_SHADER,vsSource);
+const fragmentShader = createShader(gl.FRAGMENT_SHADER,fsSource);
+const program = createProgram(vertexShader,fragmentShader);
+gl.useProgram(program);
+
+const posLoc = gl.getAttribLocation(program,"a_position");
+const buffer = gl.createBuffer();
+gl.bindBuffer(gl.ARRAY_BUFFER,buffer);
+gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]),gl.STATIC_DRAW);
+gl.enableVertexAttribArray(posLoc);
+gl.vertexAttribPointer(posLoc,2,gl.FLOAT,false,0,0);
+
+const timeLoc = gl.getUniformLocation(program,"u_time");
+
+let start = Date.now();
+function render(){
+  const t = (Date.now()-start)*0.001;
+  gl.uniform1f(timeLoc,t);
+  gl.drawArrays(gl.TRIANGLES,0,6);
+  requestAnimationFrame(render);
+}
+render();
+</script>
+
+</body>
+</html>
