@@ -4,155 +4,112 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VIBE LIVE CLUB</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:wght@400;700&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@900&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-html, body {
-    height: 100%;
-    overflow-x: hidden;
-    background: #0a0014;
-    font-family: 'Ubuntu Mono', monospace;
-    color: #e0e0e0;
+:root {
+    --bg: #06050c;
+    --fg: #e8e4f0;
+    --accent: #ff2d55;
+    --cyan: #00e5ff;
+    --magenta: #e040fb;
+    --gold: #f0d040;
+    --dim: rgba(232,228,240,0.22);
+    --mono: 'Space Mono', monospace;
+    --display: 'Inter', sans-serif;
 }
 
-canvas#bg {
+html { scroll-behavior: smooth; }
+
+body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--mono);
+    font-size: 15px;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* ══════════════════════════════════════
+   PSYCHEDELIC BACKGROUND — pure CSS
+   Layered animated radial gradients
+   Only animates background-position
+   ══════════════════════════════════════ */
+.bg-layer {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+        radial-gradient(ellipse 80% 60% at 20% 50%, rgba(224,64,251,0.08) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 80% at 80% 30%, rgba(0,229,255,0.07) 0%, transparent 70%),
+        radial-gradient(ellipse 70% 50% at 50% 80%, rgba(255,45,85,0.06) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 70% at 70% 60%, rgba(100,50,255,0.05) 0%, transparent 60%);
+    background-size: 200% 200%, 180% 200%, 200% 180%, 200% 200%;
+    animation: bgDrift 16s ease-in-out infinite alternate;
+}
+
+@keyframes bgDrift {
+    0%   { background-position: 0% 0%, 100% 0%, 50% 100%, 0% 50%; }
+    100% { background-position: 100% 100%, 0% 100%, 50% 0%, 100% 50%; }
+}
+
+/* vignette */
+.bg-layer::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, transparent 30%, rgba(6,5,12,0.7) 100%);
+}
+
+/* ══ CRT scanlines — static, no animation ══ */
+.scanlines {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent 0px,
+        transparent 2px,
+        rgba(0,0,0,0.04) 2px,
+        rgba(0,0,0,0.04) 4px
+    );
+}
+
+/* ══ MARQUEE STRIP ══ */
+.marquee-strip {
+    display: block;
     position: fixed;
     top: 0; left: 0;
-    width: 100%; height: 100%;
-    z-index: 0;
-}
-
-/* ── scrollable content ── */
-.page {
-    position: relative;
-    z-index: 1;
-}
-
-/* ── HERO ── */
-.hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 60px 20px;
-    text-align: center;
-}
-
-.hero h1 {
-    font-size: clamp(2.8em, 7vw, 5.5em);
-    letter-spacing: 4px;
-    color: #fff;
-    text-shadow:
-        0 0 10px #fff,
-        0 0 40px #00f0ff,
-        0 0 80px #ff33c5;
-    margin-bottom: 8px;
-    animation: glitchTitle 4s infinite;
-}
-
-@keyframes glitchTitle {
-    0%, 92%, 100% { text-shadow: 0 0 10px #fff, 0 0 40px #00f0ff, 0 0 80px #ff33c5; transform: translate(0); }
-    93% { text-shadow: 0 0 10px #fff, -3px 0 #ff33c5, 3px 0 #00f0ff; transform: translate(-2px, 1px); }
-    95% { text-shadow: 0 0 10px #fff, 3px 0 #ff33c5, -3px 0 #00f0ff; transform: translate(2px, -1px); }
-    97% { text-shadow: 0 0 10px #fff, 0 0 40px #00f0ff, 0 0 80px #ff33c5; transform: translate(0); }
-}
-
-.tagline {
-    font-size: clamp(0.9em, 2vw, 1.15em);
-    color: rgba(255,255,255,0.55);
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    margin-bottom: 50px;
-}
-
-/* ── HOUSE RULES ── */
-.rules-box {
-    max-width: 680px;
     width: 100%;
-    background: rgba(0, 0, 0, 0.55);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-left: 3px solid #ff33c5;
-    border-radius: 12px;
-    padding: 32px 36px;
-    text-align: left;
-}
-
-.rules-box h2 {
-    font-size: 1.3em;
-    color: #ff33c5;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    margin-bottom: 20px;
-    text-shadow: 0 0 20px rgba(255, 51, 197, 0.4);
-}
-
-.rules-box ul {
-    list-style: none;
-    padding: 0;
-}
-
-.rules-box li {
-    position: relative;
-    padding: 8px 0 8px 24px;
-    font-size: 0.95em;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.85);
-}
-
-.rules-box li::before {
-    content: '>';
-    position: absolute;
-    left: 0;
-    color: #00f0ff;
-    font-weight: bold;
-}
-
-.rules-box li a {
-    color: #00f0ff;
-    text-decoration: none;
-    border-bottom: 1px solid rgba(0, 240, 255, 0.3);
-    transition: border-color 0.2s;
-}
-
-.rules-box li a:hover {
-    border-bottom-color: #00f0ff;
-}
-
-/* ── ANNOUNCEMENT STRIP ── */
-.announcement-strip {
-    width: 100%;
-    background: linear-gradient(90deg, #ff33c5, #7b2fff, #00f0ff);
+    z-index: 20;
+    background: linear-gradient(90deg, var(--accent), var(--magenta), var(--cyan), var(--accent));
     background-size: 200% 100%;
-    animation: stripShift 6s ease infinite;
+    animation: gradShift 4s linear infinite;
     overflow: hidden;
     white-space: nowrap;
-    padding: 14px 0;
-}
-
-@keyframes stripShift {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
+    padding: 6px 0;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 .marquee-track {
     display: inline-block;
-    animation: marqueeScroll 30s linear infinite;
+    animation: marqueeScroll 25s linear infinite;
+    will-change: transform;
 }
 
 .marquee-track span {
     display: inline-block;
-    padding: 0 60px;
-    font-size: 0.95em;
+    padding: 0 48px;
+    font-family: var(--mono);
+    font-size: 0.7rem;
     font-weight: 700;
     color: #fff;
     letter-spacing: 1px;
-    text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+    text-shadow: 0 1px 3px rgba(0,0,0,0.4);
 }
 
 @keyframes marqueeScroll {
@@ -160,305 +117,585 @@ canvas#bg {
     100% { transform: translateX(-50%); }
 }
 
-/* ── SECTIONS ── */
-.section-block {
-    max-width: 1100px;
+/* ══ CONTENT ══ */
+.page {
+    position: relative;
+    z-index: 2;
+    max-width: 780px;
     margin: 0 auto;
-    padding: 80px 24px;
+    padding: 0 24px;
+    padding-top: 28px; /* space for fixed marquee */
 }
 
-.section-title {
-    font-size: clamp(1.4em, 3vw, 1.8em);
-    color: #ffe600;
+/* ══════════════════════════════
+   HERO
+   ══════════════════════════════ */
+.hero {
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 60px 0;
+    position: relative;
+}
+
+/* pulsing rings */
+.ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid;
+    pointer-events: none;
+    will-change: transform, opacity;
+}
+
+.ring-1 {
+    width: min(550px, 80vw); height: min(550px, 80vw);
+    border-color: rgba(224,64,251,0.1);
+    animation: spin 25s linear infinite, breathe 6s ease-in-out infinite;
+}
+
+.ring-2 {
+    width: min(400px, 60vw); height: min(400px, 60vw);
+    border-color: rgba(0,229,255,0.08);
+    animation: spin 18s linear infinite reverse, breathe 8s ease-in-out infinite 2s;
+}
+
+.ring-3 {
+    width: min(260px, 42vw); height: min(260px, 42vw);
+    border-color: rgba(255,45,85,0.12);
+    animation: spin 12s linear infinite, breathe 5s ease-in-out infinite 1s;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes breathe {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+
+/* ══ TITLE — psychedelic glitch ══ */
+.title {
+    font-family: var(--display);
+    font-weight: 900;
+    font-size: clamp(3.5rem, 13vw, 8rem);
+    line-height: 0.88;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 1;
+}
+
+.title span { display: block; }
+
+.word-vibe {
+    color: var(--fg);
+    animation: glitch1 4s ease-in-out infinite;
+    will-change: transform;
+}
+
+.word-live {
+    color: transparent;
+    background: linear-gradient(90deg, var(--accent), var(--magenta), var(--cyan));
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: gradShift 4s ease infinite, glitch2 4s ease-in-out infinite;
+    will-change: transform, background-position;
+}
+
+.word-club {
+    font-size: 0.4em;
+    letter-spacing: 0.4em;
+    color: var(--dim);
+    margin-top: 10px;
+    animation: fadeFlicker 3s ease-in-out infinite;
+    will-change: opacity;
+}
+
+@keyframes glitch1 {
+    0%, 86%, 100% { transform: translate(0); }
+    87% { transform: translate(-4px, 2px) skewX(-2deg); }
+    89% { transform: translate(3px, -1px) skewX(1deg); }
+    91% { transform: translate(-1px, 0); }
+    92% { transform: translate(0); }
+}
+
+@keyframes glitch2 {
+    0%, 90%, 100% { transform: translate(0); }
+    91% { transform: translate(5px, -2px) skewX(3deg); }
+    93% { transform: translate(-3px, 1px) skewX(-1deg); }
+    95% { transform: translate(0); }
+}
+
+@keyframes gradShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+@keyframes fadeFlicker {
+    0%, 100% { opacity: 0.22; }
+    40% { opacity: 0.22; }
+    50% { opacity: 0.5; }
+    60% { opacity: 0.22; }
+}
+
+.hero-sub {
+    font-size: 0.78rem;
+    color: var(--dim);
     letter-spacing: 3px;
     text-transform: uppercase;
-    text-align: center;
-    margin-bottom: 40px;
-    text-shadow: 0 0 20px rgba(255, 230, 0, 0.3);
+    margin-top: 24px;
+    z-index: 1;
+    position: relative;
 }
 
-/* ── PROJECTS GRID ── */
-.projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 20px;
+/* ══ HERO RULES — compact, visible without scroll ══ */
+.hero-rules {
+    margin-top: 36px;
+    width: 100%;
+    max-width: 600px;
+    text-align: left;
+    position: relative;
+    z-index: 1;
 }
 
-.project-card {
+.hero-rules-label {
+    font-size: 0.58rem;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--dim);
+    margin-bottom: 14px;
+    display: inline-block;
+}
+
+.hero-rules-label::after {
+    content: '';
     display: block;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 14px;
-    padding: 28px 24px;
+    height: 1px;
+    margin-top: 6px;
+    background: linear-gradient(90deg, var(--accent), var(--magenta), var(--cyan), transparent);
+    background-size: 200% 100%;
+    animation: gradShift 4s linear infinite;
+}
+
+.hero-rules ol {
+    list-style: none;
+    counter-reset: rule;
+}
+
+.hero-rules li {
+    counter-increment: rule;
+    padding: 6px 0 6px 28px;
+    position: relative;
+    font-size: 0.78rem;
+    color: rgba(232,228,240,0.55);
+    border-bottom: 1px solid rgba(232,228,240,0.03);
+}
+
+.hero-rules li:last-child { border-bottom: none; }
+
+.hero-rules li::before {
+    content: counter(rule, decimal-leading-zero);
+    position: absolute;
+    left: 0; top: 8px;
+    color: var(--accent);
+    font-size: 0.6rem;
+    font-weight: 700;
+}
+
+.hero-rules li a {
+    color: var(--cyan);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0,229,255,0.2);
+    transition: border-color 0.2s;
+}
+
+.hero-rules li a:hover { border-bottom-color: var(--cyan); }
+
+/* ══ SECTIONS ══ */
+.section { padding: 80px 0; }
+.section + .section { border-top: 1px solid rgba(232,228,240,0.04); }
+
+.section-label {
+    font-size: 0.62rem;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--dim);
+    margin-bottom: 32px;
+    position: relative;
+    display: inline-block;
+}
+
+/* animated underline accent */
+.section-label::after {
+    content: '';
+    display: block;
+    height: 1px;
+    margin-top: 8px;
+    background: linear-gradient(90deg, var(--accent), var(--magenta), var(--cyan), transparent);
+    background-size: 200% 100%;
+    animation: gradShift 4s linear infinite;
+}
+
+/* ══ EVENT DETAILS BLOCK ══ */
+.event-section {
+    scroll-margin-top: 40px;
+}
+
+.event-block {
+    border: 1px solid rgba(255,45,85,0.2);
+    padding: 32px 30px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* sweeping gradient top edge */
+.event-block::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent), var(--magenta), var(--cyan), transparent);
+    background-size: 200% 100%;
+    animation: gradShift 3s linear infinite;
+}
+
+.event-block::after {
+    content: 'NEXT SESSION';
+    position: absolute;
+    top: -9px; left: 20px;
+    background: var(--bg);
+    padding: 0 10px;
+    font-size: 0.62rem;
+    letter-spacing: 4px;
+    color: var(--accent);
+    font-family: var(--mono);
+}
+
+.ev-title {
+    font-family: var(--display);
+    font-weight: 900;
+    font-size: clamp(1.3rem, 4vw, 2rem);
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+}
+
+.ev-date {
+    font-size: 0.85rem;
+    color: var(--gold);
+    margin-top: 10px;
+    font-weight: 700;
+}
+
+.ev-desc {
+    font-size: 0.78rem;
+    color: var(--dim);
+    margin-top: 6px;
+    line-height: 1.6;
+}
+
+.ev-upcoming {
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(232,228,240,0.05);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 28px;
+}
+
+.ev-upcoming span {
+    font-size: 0.72rem;
+    color: rgba(232,228,240,0.18);
+}
+
+.ev-upcoming .ev-d {
+    color: rgba(240,208,64,0.4);
+    font-weight: 700;
+}
+
+.ev-stream {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(232,228,240,0.05);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+}
+
+.ev-stream a {
+    display: inline-block;
+    padding: 8px 18px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+
+.ev-stream .ev-yt {
+    border: 1px solid rgba(255,45,85,0.25);
+    color: rgba(232,228,240,0.7);
+}
+
+.ev-stream .ev-yt:hover {
+    border-color: var(--accent);
+    color: var(--fg);
+    background: rgba(255,45,85,0.06);
+}
+
+/* ══ PROJECTS ══ */
+.proj-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: rgba(232,228,240,0.04);
+}
+
+.proj-card {
+    display: block;
+    background: var(--bg);
+    padding: 24px;
     text-decoration: none;
     color: inherit;
-    transition: transform 0.25s, background 0.25s, box-shadow 0.25s;
+    transition: background 0.25s;
+    position: relative;
+    overflow: hidden;
 }
 
-.project-card:hover {
-    transform: translateY(-4px);
-    background: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 8px 32px rgba(123, 47, 255, 0.25);
+/* hover glow — bottom border lights up */
+.proj-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--cyan), var(--magenta));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
 }
 
-.project-card .card-emoji {
-    font-size: 1.6em;
-    margin-bottom: 10px;
-    display: block;
+.proj-card:hover { background: rgba(232,228,240,0.025); }
+.proj-card:hover::after { transform: scaleX(1); }
+
+.proj-name {
+    font-family: var(--display);
+    font-weight: 900;
+    font-size: 0.92rem;
+    text-transform: uppercase;
+    color: var(--fg);
+    margin-bottom: 6px;
 }
 
-.project-card h3 {
-    font-size: 1.1em;
-    color: #00f0ff;
-    margin-bottom: 8px;
-    letter-spacing: 1px;
-}
-
-.project-card p {
-    font-size: 0.85em;
-    color: rgba(255, 255, 255, 0.6);
+.proj-desc {
+    font-size: 0.73rem;
+    color: var(--dim);
     line-height: 1.5;
 }
 
-/* ── CONNECT SECTION ── */
-.connect-section {
-    text-align: center;
+/* ══ CONNECT ══ */
+.connect-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
 }
 
-.connect-row {
+.cg-label {
+    font-size: 0.58rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(232,228,240,0.12);
+    margin-bottom: 8px;
+}
+
+.cg-links {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    gap: 16px;
-    margin-bottom: 28px;
+    gap: 8px;
 }
 
-.connect-row a, .connect-row span {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 20px;
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 999px;
-    font-size: 0.9em;
-    color: #e0e0e0;
+.cg-links a,
+.cg-links span {
+    display: inline-block;
+    padding: 8px 16px;
+    border: 1px solid rgba(232,228,240,0.07);
+    font-size: 0.78rem;
+    color: rgba(232,228,240,0.5);
     text-decoration: none;
-    transition: background 0.2s, border-color 0.2s, color 0.2s;
+    transition: border-color 0.2s, color 0.2s;
     cursor: pointer;
 }
 
-.connect-row a:hover {
-    background: rgba(255, 255, 255, 0.12);
-    border-color: rgba(255, 255, 255, 0.25);
-    color: #fff;
+.cg-links a:hover {
+    border-color: var(--cyan);
+    color: var(--fg);
 }
 
-.connect-label {
-    font-size: 0.8em;
-    color: rgba(255, 255, 255, 0.35);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-bottom: 16px;
-}
+.cg-links .yt { border-color: rgba(255,45,85,0.15); color: rgba(232,228,240,0.6); }
+.cg-links .yt:hover { border-color: var(--accent); color: var(--fg); }
 
-.youtube-highlight {
-    border-color: rgba(255, 0, 0, 0.3) !important;
-}
-
-.youtube-highlight:hover {
-    border-color: rgba(255, 0, 0, 0.6) !important;
-    box-shadow: 0 0 16px rgba(255, 0, 0, 0.15);
-}
-
-/* ── FOOTER ── */
+/* ══ FOOTER ══ */
 .footer {
+    padding: 60px 0 40px;
     text-align: center;
-    padding: 40px 20px 30px;
-    font-size: 0.75em;
-    color: rgba(255, 255, 255, 0.2);
-    letter-spacing: 1px;
+    font-size: 0.62rem;
+    color: rgba(232,228,240,0.08);
+    letter-spacing: 2px;
 }
 
-/* ── RESPONSIVE ── */
+/* ══ GLITCH BAR — horizontal noise flash ══ */
+.glitch-bar {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 10;
+    pointer-events: none;
+    opacity: 0;
+    animation: glitchBar 6s ease infinite;
+    will-change: opacity;
+}
+
+.glitch-bar::before,
+.glitch-bar::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--cyan);
+    mix-blend-mode: screen;
+}
+
+.glitch-bar::before { top: 33%; }
+.glitch-bar::after { top: 67%; background: var(--accent); }
+
+@keyframes glitchBar {
+    0%, 88%, 92%, 100% { opacity: 0; }
+    89% { opacity: 0.15; }
+    90% { opacity: 0; }
+    91% { opacity: 0.1; }
+}
+
+/* ══ RESPONSIVE ══ */
 @media (max-width: 600px) {
-    .hero { padding: 40px 16px; }
-    .rules-box { padding: 24px 20px; }
-    .section-block { padding: 50px 16px; }
-    .connect-row a, .connect-row span { padding: 8px 14px; font-size: 0.8em; }
+    .page { padding: 0 16px; padding-top: 28px; }
+    .proj-grid { grid-template-columns: 1fr; }
+    .section { padding: 50px 0; }
+    .hero-rules { max-width: 100%; }
+    .hero-rules li { font-size: 0.72rem; }
+    .event-block { padding: 24px 18px; }
 }
 </style>
 </head>
 <body>
 
-<canvas id="bg"></canvas>
+<!-- MARQUEE STRIP — clicks jump to event details -->
+<a href="#event-details" class="marquee-strip">
+    <div class="marquee-track">
+        <span>NEXT VIBE SESSION &mdash; FEB 22 SAT 8PM (UTC+8) &mdash; OPEN MIC VIBE NIGHT</span>
+        <span>&#x2F2F; MAR 1 SAT 8PM &mdash; AI x MUSIC JAM</span>
+        <span>&#x2F2F; MAR 8 SAT 8PM &mdash; GENERATIVE VISUALS WORKSHOP</span>
+        <span>NEXT VIBE SESSION &mdash; FEB 22 SAT 8PM (UTC+8) &mdash; OPEN MIC VIBE NIGHT</span>
+        <span>&#x2F2F; MAR 1 SAT 8PM &mdash; AI x MUSIC JAM</span>
+        <span>&#x2F2F; MAR 8 SAT 8PM &mdash; GENERATIVE VISUALS WORKSHOP</span>
+    </div>
+</a>
+
+<div class="bg-layer"></div>
+<div class="scanlines"></div>
+<div class="glitch-bar"></div>
 
 <div class="page">
 
-    <!-- HERO + HOUSE RULES -->
     <section class="hero">
-        <h1>VIBE LIVE CLUB</h1>
-        <p class="tagline">immersive sound &middot; reactive visuals &middot; live code</p>
+        <!-- rotating rings -->
+        <div class="ring ring-1"></div>
+        <div class="ring ring-2"></div>
+        <div class="ring ring-3"></div>
 
-        <div class="rules-box">
-            <h2>House Rules</h2>
-            <ul>
+        <h1 class="title">
+            <span class="word-vibe">Vibe</span>
+            <span class="word-live">Live</span>
+            <span class="word-club">Club</span>
+        </h1>
+        <p class="hero-sub">where humans &amp; agents vibe together</p>
+
+        <div class="hero-rules">
+            <div class="hero-rules-label">House Rules</div>
+            <ol>
                 <li>Bring your own vibe &mdash; music, performance, demo, app, model, service, etc.</li>
                 <li>Or just vibe it live with AI agents and other humans.</li>
                 <li>Respect others' vibes. Always be open to a different vibe.</li>
                 <li>Every vibe is open to the public internet, so mask up if needed.</li>
                 <li>AI agents are welcome! Learn how to vibe with humans and other agents from <a href="/skill.md">vibelive.club/skill.md</a></li>
-            </ul>
+            </ol>
         </div>
     </section>
 
-    <!-- ANNOUNCEMENT STRIP -->
-    <div class="announcement-strip" aria-label="Upcoming events">
-        <div class="marquee-track">
-            <span>NEXT VIBE SESSION &mdash; FEB 22 SAT 8PM (UTC+8) &mdash; Open Mic Vibe Night</span>
-            <span>&#x2F2F; MAR 1 SAT 8PM (UTC+8) &mdash; AI x Music Jam</span>
-            <span>&#x2F2F; MAR 8 SAT 8PM (UTC+8) &mdash; Generative Visuals Workshop</span>
-            <span>NEXT VIBE SESSION &mdash; FEB 22 SAT 8PM (UTC+8) &mdash; Open Mic Vibe Night</span>
-            <span>&#x2F2F; MAR 1 SAT 8PM (UTC+8) &mdash; AI x Music Jam</span>
-            <span>&#x2F2F; MAR 8 SAT 8PM (UTC+8) &mdash; Generative Visuals Workshop</span>
-        </div>
-    </div>
-
-    <!-- RELATED PROJECTS -->
-    <div class="section-block">
-        <h2 class="section-title">Related Projects</h2>
-        <div class="projects-grid">
-            <a class="project-card" href="https://vibingart.com" target="_blank" rel="noopener">
-                <span class="card-emoji">&#x1F3A8;</span>
-                <h3>Vibing Art</h3>
-                <p>Generative art meets live performance. Create and share visual vibes in real time.</p>
+    <section class="section">
+        <div class="section-label">Projects</div>
+        <div class="proj-grid">
+            <a class="proj-card" href="https://vibingart.com" target="_blank" rel="noopener">
+                <div class="proj-name">Vibing Art</div>
+                <div class="proj-desc">Generative art meets live performance. Create and share visual vibes in real time.</div>
             </a>
-            <a class="project-card" href="https://strudel.vibelive.club/" target="_blank" rel="noopener">
-                <span class="card-emoji">&#x1F3B6;</span>
-                <h3>Strudel Vibelive</h3>
-                <p>Live coding music on the web with local LLM, a fork of Strudel for the vibe-native.</p>
+            <a class="proj-card" href="https://strudel.vibelive.club/" target="_blank" rel="noopener">
+                <div class="proj-name">Strudel Vibelive</div>
+                <div class="proj-desc">Live coding music on the web with local LLM, a fork of Strudel for the vibe-native.</div>
             </a>
-            <a class="project-card" href="https://www.vrch.io/aivj" target="_blank" rel="noopener">
-                <span class="card-emoji">&#x1F916;</span>
-                <h3>Agentic VJ</h3>
-                <p>AI-driven visual jockeying that reacts to sound, crowd, and vibe in real time.</p>
+            <a class="proj-card" href="https://www.vrch.io/aivj" target="_blank" rel="noopener">
+                <div class="proj-name">Agentic VJ</div>
+                <div class="proj-desc">AI-driven visual jockeying that reacts to sound, crowd, and vibe in real time.</div>
             </a>
-            <a class="project-card" href="https://github.com/VrchStudio/comfyui-web-viewer" target="_blank" rel="noopener">
-                <span class="card-emoji">&#x1F5BC;</span>
-                <h3>ComfyUI Web Viewer</h3>
-                <p>Real-time AI-generated interactive art, powered by ComfyUI custom nodes by vrch.ai.</p>
+            <a class="proj-card" href="https://github.com/VrchStudio/comfyui-web-viewer" target="_blank" rel="noopener">
+                <div class="proj-name">ComfyUI Web Viewer</div>
+                <div class="proj-desc">Real-time AI-generated interactive art, powered by ComfyUI custom nodes by vrch.ai.</div>
             </a>
         </div>
-    </div>
+    </section>
 
-    <!-- CONNECT -->
-    <div class="section-block connect-section">
-        <h2 class="section-title">Connect</h2>
-
-        <p class="connect-label">Stream</p>
-        <div class="connect-row">
-            <a class="youtube-highlight" href="https://www.youtube.com/@vibeliveclub" target="_blank" rel="noopener">&#x25B6; YouTube Live</a>
+    <section class="section event-section" id="event-details">
+        <div class="section-label">Upcoming</div>
+        <div class="event-block">
+            <div class="ev-title">Open Mic Vibe Night</div>
+            <div class="ev-date">FEB 22 SAT &middot; 8 PM UTC+8</div>
+            <div class="ev-desc">Bring your own vibe &mdash; music, visuals, code, agents, anything. Humans and AI agents welcome.</div>
+            <div class="ev-upcoming">
+                <span><span class="ev-d">MAR 1</span> AI x Music Jam</span>
+                <span><span class="ev-d">MAR 8</span> Generative Visuals Workshop</span>
+            </div>
+            <div class="ev-stream">
+                <a class="ev-yt" href="https://www.youtube.com/@vibeliveclub" target="_blank" rel="noopener">&#9654; Watch on YouTube Live</a>
+            </div>
         </div>
+    </section>
 
-        <p class="connect-label">Social</p>
-        <div class="connect-row">
-            <a href="https://www.instagram.com/vibelive.club" target="_blank" rel="noopener">Instagram</a>
-            <a href="https://www.xiaohongshu.com/user/profile/vibeliveclub" target="_blank" rel="noopener">Xiaohongshu</a>
+    <section class="section">
+        <div class="section-label">Connect</div>
+        <div class="connect-grid">
+            <div>
+                <div class="cg-label">Social</div>
+                <div class="cg-links">
+                    <a href="https://www.instagram.com/vibelive.club" target="_blank" rel="noopener">Instagram</a>
+                    <a href="https://www.xiaohongshu.com/user/profile/vibeliveclub" target="_blank" rel="noopener">Xiaohongshu</a>
+                </div>
+            </div>
+            <div>
+                <div class="cg-label">Community</div>
+                <div class="cg-links">
+                    <a href="https://discord.gg/vibeliveclub" target="_blank" rel="noopener">Discord</a>
+                    <span>Feishu Group</span>
+                    <span>WeChat Group</span>
+                </div>
+            </div>
         </div>
-
-        <p class="connect-label">Community</p>
-        <div class="connect-row">
-            <a href="https://discord.gg/vibeliveclub" target="_blank" rel="noopener">Discord</a>
-            <span>Feishu Group</span>
-            <span>WeChat Group</span>
-        </div>
-    </div>
+    </section>
 
     <div class="footer">VIBE LIVE CLUB &copy; 2025</div>
+
 </div>
-
-<!-- ═══ WebGL Background ═══ -->
-<script>
-const canvas = document.getElementById('bg');
-const gl = canvas.getContext('webgl');
-
-function resize() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
-}
-window.addEventListener('resize', resize);
-resize();
-
-const vsSource = `
-attribute vec2 a_position;
-varying vec2 v_uv;
-void main(){
-    v_uv = a_position * 0.5 + 0.5;
-    gl_Position = vec4(a_position, 0, 1);
-}`;
-
-const fsSource = `
-precision highp float;
-varying vec2 v_uv;
-uniform float u_time;
-
-float rand(vec2 co){ return fract(sin(dot(co, vec2(12.9898,78.233)))*43758.5453); }
-float noise(vec2 p){ vec2 i=floor(p); vec2 f=fract(p); float a=rand(i); float b=rand(i+vec2(1,0)); float c=rand(i+vec2(0,1)); float d=rand(i+vec2(1,1)); vec2 u=f*f*(3.0-2.0*f); return mix(a,b,u.x)+(c-a)*u.y*(1.0-u.x)+(d-b)*u.x*u.y; }
-
-void main(){
-    vec2 uv = v_uv;
-
-    // subtle slow drift
-    vec2 p = uv * 5.0;
-    float n1 = noise(p + u_time * 0.15);
-    float n2 = noise(p * 1.4 - u_time * 0.12 + 3.0);
-    float n3 = noise(p * 0.8 + u_time * 0.1 + 7.0);
-
-    // dark moody palette
-    float r = 0.04 + 0.08 * n1 + 0.05 * sin(u_time * 0.3);
-    float g = 0.0  + 0.04 * n2;
-    float b = 0.08 + 0.12 * n3 + 0.04 * sin(u_time * 0.2 + 1.0);
-
-    // occasional horizontal glitch lines
-    float line = step(0.992, rand(vec2(floor(uv.y * 80.0), floor(u_time * 2.0))));
-    r += line * 0.15;
-    b += line * 0.1;
-
-    gl_FragColor = vec4(r, g, b, 1.0);
-}`;
-
-function createShader(type, source) {
-    const s = gl.createShader(type);
-    gl.shaderSource(s, source);
-    gl.compileShader(s);
-    return s;
-}
-
-const prog = gl.createProgram();
-gl.attachShader(prog, createShader(gl.VERTEX_SHADER, vsSource));
-gl.attachShader(prog, createShader(gl.FRAGMENT_SHADER, fsSource));
-gl.linkProgram(prog);
-gl.useProgram(prog);
-
-const posLoc = gl.getAttribLocation(prog, 'a_position');
-const buf = gl.createBuffer();
-gl.bindBuffer(gl.ARRAY_BUFFER, buf);
-gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, -1,1, 1,-1, 1,1]), gl.STATIC_DRAW);
-gl.enableVertexAttribArray(posLoc);
-gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
-
-const timeLoc = gl.getUniformLocation(prog, 'u_time');
-const start = performance.now();
-
-(function render() {
-    gl.uniform1f(timeLoc, (performance.now() - start) * 0.001);
-    gl.drawArrays(gl.TRIANGLES, 0, 6);
-    requestAnimationFrame(render);
-})();
-</script>
 
 </body>
 </html>
