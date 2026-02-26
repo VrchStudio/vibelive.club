@@ -6,15 +6,23 @@
 <title>VIBE LIVE CLUB</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@400;500&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-    --bg: #000;
+    --bg: #06010f;
     --fg: #fff;
+    --accent: #ff1493;
+    --violet: #8b5cf6;
+    --cyan: #40e0d0;
+    --lime: #a3ff12;
+    --gold: #ffe347;
+    --panel: rgba(6,1,15,0.65);
+    --display: 'Bebas Neue', 'Arial Narrow', Impact, sans-serif;
     --serif: 'Instrument Serif', Georgia, serif;
     --sans: 'DM Sans', -apple-system, system-ui, sans-serif;
+    --mono: 'Share Tech Mono', monospace;
 }
 
 html { scroll-behavior: smooth; }
@@ -23,7 +31,7 @@ body {
     background: var(--bg);
     color: var(--fg);
     font-family: var(--sans);
-    font-size: 16px;
+    font-size: 17px;
     line-height: 1.7;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
@@ -50,37 +58,36 @@ canvas#field {
     position: absolute;
     top: -25%; left: -25%;
     width: 150%; height: 150%;
-    opacity: 0.28;
+    opacity: 0.25;
 }
 
 .wash-a {
     background:
-        radial-gradient(ellipse at 25% 30%, hsla(280, 75%, 20%, 1), transparent 50%),
-        radial-gradient(ellipse at 82% 68%, hsla(340, 65%, 16%, 1), transparent 50%);
+        radial-gradient(ellipse at 25% 30%, hsla(328, 85%, 22%, 1), transparent 50%),
+        radial-gradient(ellipse at 82% 68%, hsla(280, 65%, 16%, 1), transparent 50%);
     animation: driftA 28s ease-in-out infinite alternate;
 }
 
 .wash-b {
     background:
-        radial-gradient(ellipse at 72% 22%, hsla(210, 70%, 16%, 1), transparent 50%),
-        radial-gradient(ellipse at 22% 78%, hsla(265, 60%, 15%, 1), transparent 50%);
+        radial-gradient(ellipse at 72% 22%, hsla(260, 70%, 18%, 1), transparent 50%),
+        radial-gradient(ellipse at 22% 78%, hsla(330, 60%, 15%, 1), transparent 50%);
     animation: driftB 35s ease-in-out infinite alternate;
 }
 
 .wash-c {
     background:
-        radial-gradient(ellipse at 50% 50%, hsla(320, 55%, 14%, 1), transparent 45%),
-        radial-gradient(ellipse at 18% 32%, hsla(195, 65%, 13%, 1), transparent 50%);
+        radial-gradient(ellipse at 50% 50%, hsla(340, 65%, 16%, 1), transparent 45%),
+        radial-gradient(ellipse at 18% 32%, hsla(175, 55%, 12%, 1), transparent 50%);
     animation: driftC 42s ease-in-out infinite alternate;
 }
 
-/* Party warmth — more vivid pinks & magentas */
 .wash-d {
     background:
-        radial-gradient(ellipse at 55% 38%, hsla(310, 65%, 18%, 1), transparent 40%),
-        radial-gradient(ellipse at 38% 70%, hsla(255, 50%, 16%, 1), transparent 45%);
+        radial-gradient(ellipse at 55% 38%, hsla(328, 80%, 20%, 1), transparent 40%),
+        radial-gradient(ellipse at 38% 70%, hsla(265, 55%, 16%, 1), transparent 45%);
     animation: driftD 24s ease-in-out infinite alternate;
-    opacity: 0.2;
+    opacity: 0.22;
 }
 
 @keyframes driftA {
@@ -96,19 +103,19 @@ canvas#field {
 }
 
 @keyframes driftC {
-    0%   { transform: translate(0, 0) rotate(0deg) scale(1); opacity: 0.28; }
-    33%  { transform: translate(5%, 7%) rotate(9deg) scale(1.07); opacity: 0.32; }
-    66%  { transform: translate(-7%, -4%) rotate(-13deg) scale(0.96); opacity: 0.22; }
-    100% { transform: translate(3%, -6%) rotate(7deg) scale(1.04); opacity: 0.3; }
+    0%   { transform: translate(0, 0) rotate(0deg) scale(1); opacity: 0.25; }
+    33%  { transform: translate(5%, 7%) rotate(9deg) scale(1.07); opacity: 0.3; }
+    66%  { transform: translate(-7%, -4%) rotate(-13deg) scale(0.96); opacity: 0.2; }
+    100% { transform: translate(3%, -6%) rotate(7deg) scale(1.04); opacity: 0.28; }
 }
 
 @keyframes driftD {
-    0%   { transform: translate(0, 0) rotate(0deg) scale(1); opacity: 0.2; }
-    50%  { transform: translate(-6%, -5%) rotate(-12deg) scale(1.12); opacity: 0.28; }
-    100% { transform: translate(8%, 4%) rotate(15deg) scale(0.96); opacity: 0.16; }
+    0%   { transform: translate(0, 0) rotate(0deg) scale(1); opacity: 0.22; }
+    50%  { transform: translate(-6%, -5%) rotate(-12deg) scale(1.12); opacity: 0.3; }
+    100% { transform: translate(8%, 4%) rotate(15deg) scale(0.96); opacity: 0.18; }
 }
 
-/* ═══ Floating wireframe shapes — subtle geometric accents ═══ */
+/* ═══ Floating wireframe shapes — colored accents ═══ */
 .wire-shape {
     position: fixed;
     pointer-events: none;
@@ -118,57 +125,94 @@ canvas#field {
 
 .wire-shape svg {
     width: 100%; height: 100%;
-    stroke-width: 0.4;
+    stroke-width: 0.6;
     fill: none;
 }
 
 .wire-1 {
-    width: 220px; height: 220px;
-    top: 8%; right: 6%;
-    animation: wFloat1 26s ease-in-out infinite, wBreathe 9s ease-in-out infinite;
+    width: 240px; height: 240px;
+    top: 8%; right: 5%;
+    animation: wFloat1 24s ease-in-out infinite, wBreathe 8s ease-in-out infinite;
 }
-.wire-1 svg { stroke: rgba(255,255,255,0.04); }
+.wire-1 svg { stroke: rgba(255,20,147,0.14); }
 
 .wire-2 {
-    width: 160px; height: 160px;
-    top: 55%; left: 4%;
-    animation: wFloat2 30s ease-in-out infinite, wBreathe 11s ease-in-out infinite 3s;
+    width: 170px; height: 170px;
+    top: 55%; left: 3%;
+    animation: wFloat2 30s ease-in-out infinite, wBreathe 10s ease-in-out infinite 3s;
 }
-.wire-2 svg { stroke: rgba(255,255,255,0.03); }
+.wire-2 svg { stroke: rgba(139,92,246,0.12); }
 
 .wire-3 {
-    width: 120px; height: 120px;
-    bottom: 20%; right: 10%;
-    animation: wFloat1 22s ease-in-out infinite reverse, wBreathe 8s ease-in-out infinite 5s;
+    width: 130px; height: 130px;
+    bottom: 18%; right: 8%;
+    animation: wFloat1 20s ease-in-out infinite reverse, wBreathe 7s ease-in-out infinite 5s;
 }
-.wire-3 svg { stroke: rgba(255,255,255,0.03); }
+.wire-3 svg { stroke: rgba(64,224,208,0.1); }
+
+.wire-4 {
+    width: 190px; height: 190px;
+    bottom: 40%; left: 7%;
+    animation: wFloat2 26s ease-in-out infinite reverse, wBreathe 9s ease-in-out infinite 2s;
+}
+.wire-4 svg { stroke: rgba(255,20,147,0.08); }
 
 @keyframes wFloat1 {
     0%, 100% { transform: translate(0, 0) rotate(0deg); }
-    25% { transform: translate(-20px, 15px) rotate(90deg); }
-    50% { transform: translate(10px, -12px) rotate(180deg); }
-    75% { transform: translate(18px, 20px) rotate(270deg); }
+    25% { transform: translate(-25px, 20px) rotate(90deg); }
+    50% { transform: translate(12px, -15px) rotate(180deg); }
+    75% { transform: translate(22px, 25px) rotate(270deg); }
 }
 
 @keyframes wFloat2 {
     0%, 100% { transform: translate(0, 0) rotate(0deg); }
-    33% { transform: translate(22px, -25px) rotate(120deg); }
-    66% { transform: translate(-18px, 14px) rotate(240deg); }
+    33% { transform: translate(28px, -30px) rotate(120deg); }
+    66% { transform: translate(-20px, 18px) rotate(240deg); }
 }
 
 @keyframes wBreathe {
     0%, 100% { opacity: 0.3; }
-    50% { opacity: 0.8; }
+    50% { opacity: 0.85; }
 }
 
-/* ═══ Glitch flash — rare subtle disruption ═══ */
+/* ═══ Data stream — falling vertical lines ═══ */
+.data-stream {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.data-line {
+    position: absolute;
+    top: -20%;
+    width: 1px;
+    height: 18%;
+    will-change: transform, opacity;
+}
+
+.dl-1 { left: 12%; background: linear-gradient(to bottom, transparent, rgba(255,20,147,0.12), transparent); animation: dataFall 12s linear infinite; }
+.dl-2 { left: 30%; background: linear-gradient(to bottom, transparent, rgba(139,92,246,0.1), transparent); animation: dataFall 18s linear infinite 4s; }
+.dl-3 { left: 55%; background: linear-gradient(to bottom, transparent, rgba(64,224,208,0.08), transparent); animation: dataFall 15s linear infinite 8s; }
+.dl-4 { left: 78%; background: linear-gradient(to bottom, transparent, rgba(255,20,147,0.08), transparent); animation: dataFall 21s linear infinite 2s; }
+.dl-5 { left: 92%; background: linear-gradient(to bottom, transparent, rgba(139,92,246,0.06), transparent); animation: dataFall 25s linear infinite 11s; }
+
+@keyframes dataFall {
+    0%   { transform: translateY(0); opacity: 0; }
+    8%   { opacity: 1; }
+    92%  { opacity: 1; }
+    100% { transform: translateY(700%); opacity: 0; }
+}
+
+/* ═══ Glitch flash — colored disruption ═══ */
 .glitch-bar {
     position: fixed;
     inset: 0;
     z-index: 3;
     pointer-events: none;
     opacity: 0;
-    animation: glitchFlash 10s ease infinite;
+    animation: glitchFlash 8s ease infinite;
     will-change: opacity;
 }
 
@@ -176,8 +220,8 @@ canvas#field {
     content: '';
     position: absolute;
     left: 0; width: 100%; height: 1px;
-    top: 35%;
-    background: rgba(255,255,255,0.3);
+    top: 32%;
+    background: var(--accent);
     mix-blend-mode: screen;
 }
 
@@ -185,15 +229,16 @@ canvas#field {
     content: '';
     position: absolute;
     left: 0; width: 100%; height: 1px;
-    top: 70%;
-    background: rgba(255,255,255,0.2);
+    top: 71%;
+    background: var(--cyan);
     mix-blend-mode: screen;
 }
 
 @keyframes glitchFlash {
-    0%, 92%, 95%, 100% { opacity: 0; }
-    93% { opacity: 0.4; }
-    94% { opacity: 0; }
+    0%, 90%, 94%, 100% { opacity: 0; }
+    91% { opacity: 0.2; }
+    92% { opacity: 0; }
+    93% { opacity: 0.12; }
 }
 
 /* ═══ MARQUEE STRIP ═══ */
@@ -203,34 +248,33 @@ canvas#field {
     top: 0; left: 0;
     width: 100%;
     z-index: 20;
-    background: rgba(0,0,0,0.8);
-    border-bottom: 1px solid rgba(255,255,255,0.05);
+    background: rgba(6,1,15,0.88);
     overflow: hidden;
     white-space: nowrap;
-    padding: 10px 0;
+    padding: 9px 0;
     text-decoration: none;
     cursor: pointer;
+    border-bottom: 1px solid rgba(255,20,147,0.12);
 }
 
 .marquee-track {
     display: inline-block;
-    animation: marqueeScroll 35s linear infinite;
+    animation: marqueeScroll 30s linear infinite;
     will-change: transform;
 }
 
 .marquee-track span {
     display: inline-block;
-    padding: 0 48px;
-    font-family: var(--sans);
-    font-size: 0.7rem;
-    font-weight: 500;
-    color: rgba(255,255,255,0.3);
-    letter-spacing: 0.15em;
+    padding: 0 42px;
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: rgba(255,20,147,0.5);
+    letter-spacing: 0.12em;
     text-transform: uppercase;
 }
 
 .marquee-track .sep {
-    color: rgba(255,255,255,0.1);
+    color: rgba(163,255,18,0.35);
     padding: 0 8px;
 }
 
@@ -249,58 +293,104 @@ canvas#field {
     padding-top: 40px;
 }
 
-/* ═══ HERO ═══ */
+/* ═══ HERO — Magazine Cover Layout ═══ */
 .hero {
+    /* Break out of .page's 720px container */
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    padding-left: max(40px, calc((100vw - 1100px) / 2));
+    padding-right: max(40px, calc((100vw - 1100px) / 2));
+
     min-height: 100vh;
     min-height: 100dvh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 80px 0 40px;
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    grid-template-rows: auto auto 1fr;
+    gap: 0 48px;
+    align-content: center;
+    padding-top: 100px;
+    padding-bottom: 60px;
+    position: relative;
 }
 
-/* Title spacer — in flow, hidden, particles render through it */
-.title-spacer {
+/* Editorial accent — issue number */
+.hero::before {
+    content: 'No. 01';
+    position: absolute;
+    top: 88px;
+    right: max(40px, calc((100vw - 1100px) / 2));
     font-family: var(--serif);
-    font-size: clamp(4rem, 14vw, 9rem);
+    font-style: italic;
+    font-size: 0.82rem;
+    color: rgba(255,20,147,0.2);
+    letter-spacing: 0.05em;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Title spacer — stacked words, justified to same width, particles render through it */
+.title-spacer {
+    font-family: var(--display);
+    font-size: clamp(6.5rem, 18vw, 14rem);
     font-weight: 400;
-    letter-spacing: -0.02em;
-    line-height: 1;
+    letter-spacing: 0.04em;
+    line-height: 0.92;
+    text-transform: uppercase;
     visibility: hidden;
     pointer-events: none;
-    margin-bottom: 0;
+    margin-bottom: 16px;
+    grid-column: 1;
+    grid-row: 2;
+    text-align: left;
+    align-self: start;
+    width: fit-content;
 }
 
+.title-spacer span { display: block; }
+
+/* Subtitle — editorial tagline */
 .hero-sub {
-    font-family: var(--sans);
-    font-size: clamp(0.95rem, 2vw, 1.15rem);
+    grid-column: 1;
+    grid-row: 1;
+    align-self: end;
+    font-family: var(--mono);
+    font-size: 0.8rem;
     font-weight: 400;
-    color: rgba(255,255,255,0.35);
-    letter-spacing: 0.01em;
-    margin-top: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: rgba(163,255,18,0.4);
+    margin-bottom: 20px;
+    text-align: left;
     z-index: 1;
     position: relative;
 }
 
-/* ═══ HOUSE RULES ═══ */
+/* ═══ HOUSE RULES — Right Sidebar ═══ */
 .hero-rules {
-    margin-top: 48px;
+    grid-column: 2;
+    grid-row: 2 / 4;
+    align-self: start;
     width: 100%;
-    max-width: 560px;
+    max-width: none;
+    margin-top: 0;
     text-align: left;
     position: relative;
     z-index: 1;
+    background: rgba(6,1,15,0.2);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    padding: 22px 22px 18px;
+    border: 1px solid rgba(255,20,147,0.04);
+    border-top: 2px solid rgba(255,20,147,0.15);
 }
 
 .hero-rules-label {
+    font-family: var(--mono);
     font-size: 0.7rem;
-    font-weight: 500;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.15);
-    margin-bottom: 20px;
+    color: rgba(163,255,18,0.4);
+    margin-bottom: 16px;
 }
 
 .hero-rules ol {
@@ -310,53 +400,52 @@ canvas#field {
 
 .hero-rules li {
     counter-increment: rule;
-    padding: 10px 0 10px 32px;
+    padding: 8px 0 8px 26px;
     position: relative;
-    font-size: 0.92rem;
-    color: rgba(255,255,255,0.35);
-    line-height: 1.65;
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.6;
 }
 
 .hero-rules li + li {
-    border-top: 1px solid rgba(255,255,255,0.04);
+    border-top: 1px solid rgba(255,20,147,0.06);
 }
 
 .hero-rules li::before {
     content: counter(rule);
     position: absolute;
-    left: 0; top: 11px;
+    left: 0; top: 9px;
     font-family: var(--serif);
     font-style: italic;
-    font-size: 0.95rem;
-    color: rgba(255,255,255,0.15);
+    font-size: 0.85rem;
+    color: rgba(255,20,147,0.35);
 }
 
 .hero-rules li a {
-    color: rgba(255,255,255,0.5);
+    color: rgba(163,255,18,0.6);
     text-decoration: none;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
+    border-bottom: 1px solid rgba(163,255,18,0.2);
     transition: color 0.3s, border-color 0.3s;
 }
 
 .hero-rules li a:hover {
-    color: rgba(255,255,255,0.7);
-    border-bottom-color: rgba(255,255,255,0.3);
+    color: rgba(163,255,18,0.85);
+    border-bottom-color: rgba(163,255,18,0.5);
 }
 
 /* ═══ SECTIONS ═══ */
 .section { padding: 80px 0; }
 
 .section + .section {
-    border-top: 1px solid rgba(255,255,255,0.04);
+    border-top: 1px solid rgba(255,20,147,0.06);
 }
 
 .section-label {
-    font-family: var(--sans);
-    font-size: 0.7rem;
-    font-weight: 500;
+    font-family: var(--mono);
+    font-size: 0.78rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.15);
+    color: rgba(163,255,18,0.4);
     margin-bottom: 36px;
 }
 
@@ -364,106 +453,149 @@ canvas#field {
 .event-section { scroll-margin-top: 48px; }
 
 .event-block {
-    padding: 36px 0;
-    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 32px 28px;
+    border: 1px solid rgba(255,20,147,0.1);
+    position: relative;
+    overflow: hidden;
+    background: var(--panel);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.event-block::before {
+    content: '';
+    position: absolute;
+    top: -1px; left: 28px;
+    width: 48px; height: 2px;
+    background: var(--accent);
+    opacity: 0.3;
 }
 
 .event-tag {
-    font-size: 0.65rem;
-    font-weight: 500;
+    font-family: var(--mono);
+    font-size: 0.72rem;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.2);
+    color: rgba(255,227,71,0.55);
     margin-bottom: 16px;
 }
 
 .ev-title {
     font-family: var(--serif);
     font-weight: 400;
-    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    font-size: clamp(2.1rem, 5.5vw, 3.2rem);
     letter-spacing: -0.01em;
     line-height: 1.1;
-    color: rgba(255,255,255,0.85);
+    color: rgba(255,255,255,0.92);
 }
 
 .ev-date {
-    font-size: 0.88rem;
-    color: rgba(255,255,255,0.3);
+    font-family: var(--mono);
+    font-size: 0.95rem;
+    color: rgba(255,227,71,0.6);
     margin-top: 12px;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.04em;
 }
 
 .ev-desc {
-    font-size: 0.92rem;
-    color: rgba(255,255,255,0.25);
+    font-size: 1.02rem;
+    color: rgba(255,255,255,0.5);
     margin-top: 12px;
     line-height: 1.7;
     max-width: 480px;
 }
 
 .ev-upcoming {
-    margin-top: 28px;
+    margin-top: 24px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(255,20,147,0.06);
     display: flex;
     flex-wrap: wrap;
     gap: 6px 32px;
 }
 
 .ev-upcoming span {
-    font-size: 0.82rem;
-    color: rgba(255,255,255,0.15);
+    font-size: 0.92rem;
+    color: rgba(255,255,255,0.3);
 }
 
 .ev-upcoming .ev-d {
-    color: rgba(255,255,255,0.3);
+    color: rgba(163,255,18,0.55);
     font-weight: 500;
 }
 
-.ev-stream { margin-top: 28px; }
+.ev-stream {
+    margin-top: 24px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(255,20,147,0.06);
+}
 
 .ev-stream a {
     display: inline-block;
     padding: 10px 24px;
-    font-size: 0.82rem;
+    font-size: 0.92rem;
     font-weight: 500;
     text-decoration: none;
-    color: rgba(255,255,255,0.4);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 6px;
-    transition: color 0.3s, border-color 0.3s;
+    color: rgba(255,255,255,0.55);
+    border: 1px solid rgba(255,20,147,0.18);
+    border-radius: 0;
+    transition: color 0.3s, border-color 0.3s, background 0.3s;
+    position: relative;
+    overflow: hidden;
 }
 
 .ev-stream a:hover {
-    color: rgba(255,255,255,0.7);
-    border-color: rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.9);
+    border-color: var(--accent);
+    background: rgba(255,20,147,0.06);
 }
 
 /* ═══ PROJECTS ═══ */
 .proj-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 32px;
+    gap: 1px;
+    background: rgba(255,20,147,0.08);
 }
 
 .proj-card {
     display: block;
+    background: var(--panel);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 28px 22px;
     text-decoration: none;
     color: inherit;
-    transition: opacity 0.3s;
+    transition: background 0.3s;
+    position: relative;
+    overflow: hidden;
 }
 
-.proj-card:hover { opacity: 0.7; }
+.proj-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 2px; height: 100%;
+    background: linear-gradient(to bottom, var(--accent), var(--lime));
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.4s ease;
+}
+
+.proj-card:hover { background: rgba(255,20,147,0.05); }
+.proj-card:hover::before { transform: scaleY(1); }
 
 .proj-name {
     font-family: var(--serif);
     font-weight: 400;
-    font-size: 1.15rem;
-    color: rgba(255,255,255,0.7);
+    font-size: 1.3rem;
+    color: rgba(255,255,255,0.88);
     margin-bottom: 8px;
 }
 
 .proj-desc {
-    font-size: 0.85rem;
-    color: rgba(255,255,255,0.25);
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.45);
     line-height: 1.6;
 }
 
@@ -475,11 +607,11 @@ canvas#field {
 }
 
 .cg-label {
-    font-size: 0.65rem;
-    font-weight: 500;
+    font-family: var(--mono);
+    font-size: 0.72rem;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.1);
+    color: rgba(255,227,71,0.35);
     margin-bottom: 12px;
 }
 
@@ -493,18 +625,22 @@ canvas#field {
 .cg-links span {
     display: inline-block;
     padding: 9px 20px;
-    font-size: 0.85rem;
-    color: rgba(255,255,255,0.3);
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.45);
     text-decoration: none;
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 6px;
-    transition: color 0.3s, border-color 0.3s;
+    border: 1px solid rgba(255,20,147,0.1);
+    border-radius: 0;
+    background: var(--panel);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: color 0.3s, border-color 0.3s, background 0.3s;
     cursor: pointer;
 }
 
 .cg-links a:hover {
-    color: rgba(255,255,255,0.6);
-    border-color: rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.85);
+    border-color: var(--accent);
+    background: rgba(255,20,147,0.06);
 }
 
 /* ═══ FOOTER ═══ */
@@ -513,27 +649,56 @@ canvas#field {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 0.65rem;
-    letter-spacing: 0.04em;
-    color: rgba(255,255,255,0.08);
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    color: rgba(255,20,147,0.18);
 }
 
 .footer a {
-    color: rgba(255,255,255,0.08);
+    color: rgba(163,255,18,0.18);
     text-decoration: none;
     transition: color 0.3s;
 }
 
-.footer a:hover { color: rgba(255,255,255,0.25); }
+.footer a:hover { color: rgba(163,255,18,0.45); }
 
 /* ═══ RESPONSIVE ═══ */
+@media (max-width: 768px) {
+    .hero {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+        gap: 20px 0;
+        padding-left: 24px;
+        padding-right: 24px;
+        padding-top: 80px;
+    }
+    .hero::before { display: none; }
+    .title-spacer {
+        grid-column: 1;
+        grid-row: 2;
+        font-size: clamp(4rem, 22vw, 7rem);
+    }
+    .hero-sub {
+        grid-column: 1;
+        grid-row: 1;
+    }
+    .hero-rules {
+        grid-column: 1;
+        grid-row: 3;
+        max-width: 100%;
+        padding: 20px 18px 16px;
+    }
+    .hero-rules li { font-size: 0.9rem; }
+}
+
 @media (max-width: 600px) {
     .page { padding: 0 24px; padding-top: 36px; }
-    .proj-grid { grid-template-columns: 1fr; gap: 24px; }
+    .proj-grid { grid-template-columns: 1fr; gap: 1px; }
     .section { padding: 60px 0; }
-    .hero-rules { max-width: 100%; }
-    .hero-rules li { font-size: 0.85rem; }
+    .event-block { padding: 24px 18px; }
     .wire-shape { display: none; }
+    .data-stream { display: none; }
 }
 </style>
 </head>
@@ -545,14 +710,14 @@ canvas#field {
 <a href="#event-details" class="marquee-strip">
     <div class="marquee-track">
         <span>Next Vibe Session &mdash; Feb 22 Sat 8PM (UTC+8) &mdash; Open Mic Vibe Night</span>
-        <span class="sep">&middot;</span>
+        <span class="sep">&#x25C8;</span>
         <span>Mar 1 Sat 8PM &mdash; AI x Music Jam</span>
-        <span class="sep">&middot;</span>
+        <span class="sep">&#x25C8;</span>
         <span>Mar 8 Sat 8PM &mdash; Generative Visuals Workshop</span>
         <span>Next Vibe Session &mdash; Feb 22 Sat 8PM (UTC+8) &mdash; Open Mic Vibe Night</span>
-        <span class="sep">&middot;</span>
+        <span class="sep">&#x25C8;</span>
         <span>Mar 1 Sat 8PM &mdash; AI x Music Jam</span>
-        <span class="sep">&middot;</span>
+        <span class="sep">&#x25C8;</span>
         <span>Mar 8 Sat 8PM &mdash; Generative Visuals Workshop</span>
     </div>
 </a>
@@ -565,6 +730,15 @@ canvas#field {
     <div class="wash-layer wash-d"></div>
 </div>
 
+<!-- ═══ DATA STREAMS ═══ -->
+<div class="data-stream">
+    <div class="data-line dl-1"></div>
+    <div class="data-line dl-2"></div>
+    <div class="data-line dl-3"></div>
+    <div class="data-line dl-4"></div>
+    <div class="data-line dl-5"></div>
+</div>
+
 <!-- ═══ WIREFRAME SHAPES ═══ -->
 <div class="wire-shape wire-1">
     <svg viewBox="0 0 100 100"><polygon points="50,5 95,27.5 95,72.5 50,95 5,72.5 5,27.5"/></svg>
@@ -575,6 +749,9 @@ canvas#field {
 <div class="wire-shape wire-3">
     <svg viewBox="0 0 100 100"><polygon points="50,5 95,90 5,90"/></svg>
 </div>
+<div class="wire-shape wire-4">
+    <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="45"/></svg>
+</div>
 
 <!-- ═══ GLITCH ═══ -->
 <div class="glitch-bar"></div>
@@ -583,7 +760,7 @@ canvas#field {
 <div class="page">
 
     <section class="hero">
-        <h1 class="title-spacer" aria-hidden="true">Vibe Live Club</h1>
+        <h1 class="title-spacer" aria-hidden="true"><span>VIBE</span><span>LIVE</span><span>CLUB</span></h1>
         <p class="hero-sub">Where humans &amp; agents vibe together</p>
 
         <div class="hero-rules">
@@ -704,36 +881,54 @@ const ctx = canvas.getContext('2d');
 let w, h, dpr, time = 0;
 
 // ── Text mask (offscreen) ──
-// We store the title position in PAGE coordinates (not viewport)
-// and convert to viewport coords each frame using current scrollY
 const maskCanvas = document.createElement('canvas');
 const maskCtx = maskCanvas.getContext('2d', { willReadFrequently: true });
 let maskData = null;
 let maskW = 0, maskH = 0;
-// Page-space position of the title center (absolute, not affected by scroll)
 let titlePageCenterX = 0, titlePageCenterY = 0;
 let maskPageOriginX = 0, maskPageOriginY = 0;
+
+function drawJustifiedWord(ctx, word, x, y, targetWidth) {
+  const chars = word.split('');
+  if (chars.length <= 1) { ctx.fillText(word, x, y); return; }
+  const charWidths = chars.map(c => ctx.measureText(c).width);
+  const totalCharWidth = charWidths.reduce((a, b) => a + b, 0);
+  const gap = (targetWidth - totalCharWidth) / (chars.length - 1);
+  let cx = x;
+  for (let i = 0; i < chars.length; i++) {
+    ctx.fillText(chars[i], cx, y);
+    cx += charWidths[i] + gap;
+  }
+}
 
 function buildTextMask() {
   const spacer = document.querySelector('.title-spacer');
   const rect = spacer.getBoundingClientRect();
   const scrollY = window.scrollY || window.pageYOffset;
 
-  // Store in page coordinates (viewport + scroll offset)
   titlePageCenterX = rect.left + rect.width / 2;
   titlePageCenterY = rect.top + rect.height / 2 + scrollY;
 
   const fontSize = parseFloat(getComputedStyle(spacer).fontSize);
-  const text = 'Vibe Live Club';
-  maskCtx.font = `${fontSize}px 'Instrument Serif', Georgia, serif`;
-  const metrics = maskCtx.measureText(text);
-  const textW = Math.ceil(metrics.width);
-  const textH = Math.ceil(fontSize * 1.3);
-  const padX = Math.ceil(fontSize * 0.3);
-  const padY = Math.ceil(fontSize * 0.3);
+  const lh = fontSize * 0.92; // match CSS line-height
+  const lines = ['VIBE', 'LIVE', 'CLUB'];
 
-  maskW = textW + padX * 2;
-  maskH = textH + padY * 2;
+  const fontStr = `${fontSize}px 'Bebas Neue', 'Arial Narrow', Impact, sans-serif`;
+  maskCtx.font = fontStr;
+
+  // Find widest line — all words justify to this width
+  let maxW = 0;
+  for (const line of lines) {
+    const m = maskCtx.measureText(line);
+    if (m.width > maxW) maxW = m.width;
+  }
+
+  const padX = Math.ceil(fontSize * 0.15);
+  const padY = Math.ceil(fontSize * 0.15);
+  const justifyW = Math.ceil(maxW);
+
+  maskW = justifyW + padX * 2;
+  maskH = Math.ceil(lh * lines.length + fontSize * 0.2) + padY * 2;
   maskCanvas.width = maskW;
   maskCanvas.height = maskH;
 
@@ -742,11 +937,15 @@ function buildTextMask() {
 
   maskCtx.fillStyle = '#000';
   maskCtx.fillRect(0, 0, maskW, maskH);
-  maskCtx.font = `${fontSize}px 'Instrument Serif', Georgia, serif`;
-  maskCtx.textAlign = 'center';
-  maskCtx.textBaseline = 'middle';
+  maskCtx.font = fontStr;
+  maskCtx.textAlign = 'left';
+  maskCtx.textBaseline = 'top';
   maskCtx.fillStyle = '#fff';
-  maskCtx.fillText(text, maskW / 2, maskH / 2);
+
+  // Draw each word justified to the same width
+  for (let i = 0; i < lines.length; i++) {
+    drawJustifiedWord(maskCtx, lines[i], padX, padY + i * lh, justifyW);
+  }
 
   const imgData = maskCtx.getImageData(0, 0, maskW, maskH);
   maskData = new Uint8Array(maskW * maskH);
@@ -755,10 +954,8 @@ function buildTextMask() {
   }
 }
 
-// Convert viewport coords to mask-local coords, accounting for scroll
 function isInTitle(vx, vy) {
   const scrollY = window.scrollY || window.pageYOffset;
-  // Convert viewport to page coords
   const px = vx;
   const py = vy + scrollY;
   const mx = Math.floor(px - maskPageOriginX);
@@ -767,10 +964,8 @@ function isInTitle(vx, vy) {
   return maskData[my * maskW + mx] === 1;
 }
 
-// Spawn inside text mask, returning viewport coordinates
 function randomPointInMask() {
   const scrollY = window.scrollY || window.pageYOffset;
-  // Convert page origin to viewport origin
   const vOriginX = maskPageOriginX;
   const vOriginY = maskPageOriginY - scrollY;
   const vCenterX = titlePageCenterX;
@@ -784,7 +979,6 @@ function randomPointInMask() {
   return { x: vCenterX, y: vCenterY };
 }
 
-// Current viewport center of title (for distance checks)
 function getTitleViewportCenter() {
   const scrollY = window.scrollY || window.pageYOffset;
   return {
@@ -811,8 +1005,8 @@ function initParticle(p, scatter, forTitle) {
   p.py = p.y;
   p.age = scatter ? Math.random() * 200 : 0;
   p.maxAge = forTitle ? (50 + Math.random() * 90) : (140 + Math.random() * 180);
-  // Warmer/wider hue range — party pinks, magentas, violets, teals
-  p.hue = forTitle ? (250 + Math.random() * 100) : (200 + Math.random() * 140);
+  // Deeppink-centered hue range — pinks, magentas, violets
+  p.hue = forTitle ? (310 + Math.random() * 60) : (270 + Math.random() * 80);
   p.forTitle = forTitle;
 }
 
@@ -826,7 +1020,7 @@ function resize() {
   canvas.style.width = w + 'px';
   canvas.style.height = h + 'px';
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-  ctx.fillStyle = '#000';
+  ctx.fillStyle = '#06010f';
   ctx.fillRect(0, 0, w, h);
 
   buildTextMask();
@@ -851,7 +1045,7 @@ const SCALE = 0.0012;
 const SPEED = 0.0004;
 
 function globalHueShift() {
-  return noise2D(time * 2.5, 0.0) * 60 + noise2D(0.0, time * 1.8) * 25;
+  return noise2D(time * 2.5, 0.0) * 40 + noise2D(0.0, time * 1.8) * 20;
 }
 
 function titleBreath() {
@@ -862,7 +1056,7 @@ function titleBreath() {
 
 // ── Animate ──
 function animate() {
-  ctx.fillStyle = 'rgba(0, 0, 0, 0.03)';
+  ctx.fillStyle = 'rgba(6, 1, 15, 0.035)';
   ctx.fillRect(0, 0, w, h);
 
   time += SPEED;
@@ -902,8 +1096,8 @@ function animate() {
     const baseAlpha = inText ? (0.92 * titleAlphaMod) : 0.4;
     const alpha = lifeFade * baseAlpha;
 
-    const hue = p.hue + n2 * 35 + hueShift;
-    const sat = inText ? (55 + Math.abs(n) * 35) : (40 + Math.abs(n) * 35);
+    const hue = p.hue + n2 * 25 + hueShift;
+    const sat = inText ? (65 + Math.abs(n) * 30) : (45 + Math.abs(n) * 35);
     const lit = inText ? (65 + Math.abs(n2) * 20) : (45 + Math.abs(n2) * 22);
     const lineW = inText ? 1.6 : 0.9;
 
