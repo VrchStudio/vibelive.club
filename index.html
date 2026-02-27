@@ -6,7 +6,7 @@
 <title>VIBE LIVE CLUB</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@400;500&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Mogra&family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@400;500&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -19,19 +19,19 @@
     --lime: #a3ff12;
     --gold: #ffe347;
     --panel: rgba(6,1,15,0.65);
-    --display: 'Bebas Neue', 'Arial Narrow', Impact, sans-serif;
+    --display: 'Mogra', cursive, sans-serif;
     --serif: 'Instrument Serif', Georgia, serif;
     --sans: 'DM Sans', -apple-system, system-ui, sans-serif;
     --mono: 'Share Tech Mono', monospace;
 }
 
-html { scroll-behavior: smooth; }
+html { font-size: 24px; scroll-behavior: smooth; }
 
 body {
     background: var(--bg);
     color: var(--fg);
     font-family: var(--sans);
-    font-size: 17px;
+    font-size: 26px;
     line-height: 1.7;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
@@ -251,7 +251,7 @@ canvas#field {
     background: rgba(6,1,15,0.88);
     overflow: hidden;
     white-space: nowrap;
-    padding: 9px 0;
+    padding: 14px 0;
     text-decoration: none;
     cursor: pointer;
     border-bottom: 1px solid rgba(255,20,147,0.12);
@@ -287,28 +287,28 @@ canvas#field {
 .page {
     position: relative;
     z-index: 4;
-    max-width: 720px;
+    max-width: 1080px;
     margin: 0 auto;
-    padding: 0 32px;
-    padding-top: 40px;
+    padding: 0 48px;
+    padding-top: 60px;
 }
 
 /* ═══ HERO — Magazine Cover Layout ═══ */
 .hero {
-    /* Break out of .page's 720px container */
+    /* Break out of .page container */
     width: 100vw;
     margin-left: calc(-50vw + 50%);
-    padding-left: max(40px, calc((100vw - 1100px) / 2));
-    padding-right: max(40px, calc((100vw - 1100px) / 2));
+    padding-left: max(60px, calc((100vw - 1400px) / 2));
+    padding-right: max(60px, calc((100vw - 1400px) / 2));
 
     min-height: 100vh;
     min-height: 100dvh;
     display: grid;
-    grid-template-columns: 1fr 300px;
-    grid-template-rows: auto auto 1fr;
-    gap: 0 48px;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto 1fr;
+    gap: 16px 80px;
     align-content: center;
-    padding-top: 100px;
+    padding-top: 80px;
     padding-bottom: 60px;
     position: relative;
 }
@@ -317,8 +317,8 @@ canvas#field {
 .hero::before {
     content: 'No. 01';
     position: absolute;
-    top: 88px;
-    right: max(40px, calc((100vw - 1100px) / 2));
+    top: 120px;
+    right: max(60px, calc((100vw - 1400px) / 2));
     font-family: var(--serif);
     font-style: italic;
     font-size: 0.82rem;
@@ -331,10 +331,10 @@ canvas#field {
 /* Title spacer — stacked words, justified to same width, particles render through it */
 .title-spacer {
     font-family: var(--display);
-    font-size: clamp(6.5rem, 18vw, 14rem);
+    font-size: clamp(5rem, 13.5vw, 8.5rem);
     font-weight: 400;
     letter-spacing: 0.04em;
-    line-height: 0.92;
+    line-height: 0.82;
     text-transform: uppercase;
     visibility: hidden;
     pointer-events: none;
@@ -359,29 +359,27 @@ canvas#field {
     text-transform: uppercase;
     letter-spacing: 0.18em;
     color: rgba(163,255,18,0.4);
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     text-align: left;
     z-index: 1;
     position: relative;
 }
 
-/* ═══ HOUSE RULES — Right Sidebar ═══ */
+/* ═══ HOUSE RULES — Right column ═══ */
 .hero-rules {
     grid-column: 2;
-    grid-row: 2 / 4;
+    grid-row: 2;
     align-self: start;
-    width: 100%;
-    max-width: none;
     margin-top: 0;
     text-align: left;
     position: relative;
     z-index: 1;
-    background: rgba(6,1,15,0.2);
+    background: rgba(6,1,15,0.25);
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
-    padding: 22px 22px 18px;
-    border: 1px solid rgba(255,20,147,0.04);
-    border-top: 2px solid rgba(255,20,147,0.15);
+    padding: 32px 36px 28px;
+    border: 1px solid rgba(255,20,147,0.06);
+    border-top: 2px solid rgba(255,20,147,0.12);
 }
 
 .hero-rules-label {
@@ -390,7 +388,7 @@ canvas#field {
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: rgba(163,255,18,0.4);
-    margin-bottom: 16px;
+    margin-bottom: 24px;
 }
 
 .hero-rules ol {
@@ -400,7 +398,7 @@ canvas#field {
 
 .hero-rules li {
     counter-increment: rule;
-    padding: 8px 0 8px 26px;
+    padding: 12px 0 12px 40px;
     position: relative;
     font-size: 0.88rem;
     color: rgba(255,255,255,0.5);
@@ -414,7 +412,7 @@ canvas#field {
 .hero-rules li::before {
     content: counter(rule);
     position: absolute;
-    left: 0; top: 9px;
+    left: 0; top: 14px;
     font-family: var(--serif);
     font-style: italic;
     font-size: 0.85rem;
@@ -434,7 +432,7 @@ canvas#field {
 }
 
 /* ═══ SECTIONS ═══ */
-.section { padding: 80px 0; }
+.section { padding: 120px 0; }
 
 .section + .section {
     border-top: 1px solid rgba(255,20,147,0.06);
@@ -446,14 +444,14 @@ canvas#field {
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: rgba(163,255,18,0.4);
-    margin-bottom: 36px;
+    margin-bottom: 54px;
 }
 
 /* ═══ EVENT DETAILS BLOCK ═══ */
 .event-section { scroll-margin-top: 48px; }
 
 .event-block {
-    padding: 32px 28px;
+    padding: 48px 42px;
     border: 1px solid rgba(255,20,147,0.1);
     position: relative;
     overflow: hidden;
@@ -465,8 +463,8 @@ canvas#field {
 .event-block::before {
     content: '';
     position: absolute;
-    top: -1px; left: 28px;
-    width: 48px; height: 2px;
+    top: -1px; left: 42px;
+    width: 72px; height: 2px;
     background: var(--accent);
     opacity: 0.3;
 }
@@ -502,16 +500,16 @@ canvas#field {
     color: rgba(255,255,255,0.5);
     margin-top: 12px;
     line-height: 1.7;
-    max-width: 480px;
+    max-width: 720px;
 }
 
 .ev-upcoming {
-    margin-top: 24px;
-    padding-top: 18px;
+    margin-top: 36px;
+    padding-top: 27px;
     border-top: 1px solid rgba(255,20,147,0.06);
     display: flex;
     flex-wrap: wrap;
-    gap: 6px 32px;
+    gap: 9px 48px;
 }
 
 .ev-upcoming span {
@@ -525,14 +523,14 @@ canvas#field {
 }
 
 .ev-stream {
-    margin-top: 24px;
-    padding-top: 18px;
+    margin-top: 36px;
+    padding-top: 27px;
     border-top: 1px solid rgba(255,20,147,0.06);
 }
 
 .ev-stream a {
     display: inline-block;
-    padding: 10px 24px;
+    padding: 15px 36px;
     font-size: 0.92rem;
     font-weight: 500;
     text-decoration: none;
@@ -563,7 +561,7 @@ canvas#field {
     background: var(--panel);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    padding: 28px 22px;
+    padding: 42px 33px;
     text-decoration: none;
     color: inherit;
     transition: background 0.3s;
@@ -603,7 +601,7 @@ canvas#field {
 .connect-grid {
     display: flex;
     flex-direction: column;
-    gap: 28px;
+    gap: 42px;
 }
 
 .cg-label {
@@ -612,19 +610,19 @@ canvas#field {
     letter-spacing: 0.18em;
     text-transform: uppercase;
     color: rgba(255,227,71,0.35);
-    margin-bottom: 12px;
+    margin-bottom: 18px;
 }
 
 .cg-links {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 15px;
 }
 
 .cg-links a,
 .cg-links span {
     display: inline-block;
-    padding: 9px 20px;
+    padding: 14px 30px;
     font-size: 0.95rem;
     color: rgba(255,255,255,0.45);
     text-decoration: none;
@@ -645,7 +643,7 @@ canvas#field {
 
 /* ═══ FOOTER ═══ */
 .footer {
-    padding: 60px 0 40px;
+    padding: 90px 0 60px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -665,19 +663,22 @@ canvas#field {
 
 /* ═══ RESPONSIVE ═══ */
 @media (max-width: 768px) {
+    html { font-size: 20px; }
     .hero {
         grid-template-columns: 1fr;
         grid-template-rows: auto auto auto;
         gap: 20px 0;
+        align-content: start;
         padding-left: 24px;
         padding-right: 24px;
-        padding-top: 80px;
+        padding-top: 100px;
     }
     .hero::before { display: none; }
     .title-spacer {
         grid-column: 1;
         grid-row: 2;
-        font-size: clamp(4rem, 22vw, 7rem);
+        font-size: clamp(3.5rem, 18vw, 5rem);
+        letter-spacing: 0.2em;
     }
     .hero-sub {
         grid-column: 1;
@@ -686,17 +687,18 @@ canvas#field {
     .hero-rules {
         grid-column: 1;
         grid-row: 3;
-        max-width: 100%;
-        padding: 20px 18px 16px;
+        align-self: start;
+        padding: 24px 20px 20px;
     }
-    .hero-rules li { font-size: 0.9rem; }
+    .hero-rules li { font-size: 0.85rem; }
 }
 
 @media (max-width: 600px) {
+    html { font-size: 18px; }
     .page { padding: 0 24px; padding-top: 36px; }
     .proj-grid { grid-template-columns: 1fr; gap: 1px; }
     .section { padding: 60px 0; }
-    .event-block { padding: 24px 18px; }
+    .event-block { padding: 28px 20px; }
     .wire-shape { display: none; }
     .data-stream { display: none; }
 }
@@ -766,12 +768,29 @@ canvas#field {
         <div class="hero-rules">
             <div class="hero-rules-label">House Rules</div>
             <ol>
-                <li>Bring your own vibe &mdash; music, performance, demo, app, model, service, etc.</li>
+                <li>Bring your own vibe &mdash; music, performance, demo, product, service, etc.</li>
                 <li>Or just vibe it live with AI agents and other humans.</li>
                 <li>Respect others' vibes. Always be open to a different vibe.</li>
                 <li>Every vibe is open to the public internet, so mask up if needed.</li>
                 <li>AI agents are welcome! Learn how to vibe with humans and other agents from <a href="/skill.md">vibelive.club/skill.md</a></li>
             </ol>
+        </div>
+    </section>
+
+    <section class="section event-section" id="event-details">
+        <div class="section-label">Upcoming</div>
+        <div class="event-block">
+            <div class="event-tag">Next Session</div>
+            <div class="ev-title">Open Mic Vibe Night</div>
+            <div class="ev-date">Feb 22 Sat &middot; 8 PM UTC+8</div>
+            <div class="ev-desc">Bring your own vibe &mdash; music, visuals, code, agents, anything. Humans and AI agents welcome.</div>
+            <div class="ev-upcoming">
+                <span><span class="ev-d">Mar 1</span> AI x Music Jam</span>
+                <span><span class="ev-d">Mar 8</span> Generative Visuals Workshop</span>
+            </div>
+            <div class="ev-stream">
+                <a href="https://www.youtube.com/@vibeliveclub" target="_blank" rel="noopener">&#9654; Watch on YouTube Live</a>
+            </div>
         </div>
     </section>
 
@@ -794,23 +813,6 @@ canvas#field {
                 <div class="proj-name">ComfyUI Web Viewer</div>
                 <div class="proj-desc">Real-time AI-generated interactive art, powered by ComfyUI custom nodes by vrch.ai.</div>
             </a>
-        </div>
-    </section>
-
-    <section class="section event-section" id="event-details">
-        <div class="section-label">Upcoming</div>
-        <div class="event-block">
-            <div class="event-tag">Next Session</div>
-            <div class="ev-title">Open Mic Vibe Night</div>
-            <div class="ev-date">Feb 22 Sat &middot; 8 PM UTC+8</div>
-            <div class="ev-desc">Bring your own vibe &mdash; music, visuals, code, agents, anything. Humans and AI agents welcome.</div>
-            <div class="ev-upcoming">
-                <span><span class="ev-d">Mar 1</span> AI x Music Jam</span>
-                <span><span class="ev-d">Mar 8</span> Generative Visuals Workshop</span>
-            </div>
-            <div class="ev-stream">
-                <a href="https://www.youtube.com/@vibeliveclub" target="_blank" rel="noopener">&#9654; Watch on YouTube Live</a>
-            </div>
         </div>
     </section>
 
@@ -910,22 +912,16 @@ function buildTextMask() {
   titlePageCenterY = rect.top + rect.height / 2 + scrollY;
 
   const fontSize = parseFloat(getComputedStyle(spacer).fontSize);
-  const lh = fontSize * 0.92; // match CSS line-height
+  const lh = fontSize * 0.82; // match CSS line-height
   const lines = ['VIBE', 'LIVE', 'CLUB'];
 
-  const fontStr = `${fontSize}px 'Bebas Neue', 'Arial Narrow', Impact, sans-serif`;
+  const fontStr = `400 ${fontSize}px 'Mogra', cursive, sans-serif`;
   maskCtx.font = fontStr;
 
-  // Find widest line — all words justify to this width
-  let maxW = 0;
-  for (const line of lines) {
-    const m = maskCtx.measureText(line);
-    if (m.width > maxW) maxW = m.width;
-  }
-
+  // Use DOM width (includes CSS letter-spacing) as justify target
   const padX = Math.ceil(fontSize * 0.15);
   const padY = Math.ceil(fontSize * 0.15);
-  const justifyW = Math.ceil(maxW);
+  const justifyW = Math.ceil(rect.width);
 
   maskW = justifyW + padX * 2;
   maskH = Math.ceil(lh * lines.length + fontSize * 0.2) + padY * 2;
