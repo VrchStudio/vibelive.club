@@ -331,10 +331,10 @@ canvas#field {
 /* Title spacer — stacked words, justified to same width, particles render through it */
 .title-spacer {
     font-family: var(--display);
-    font-size: clamp(5rem, 13.5vw, 8.5rem);
+    font-size: clamp(5.5rem, 15vw, 9rem);
     font-weight: 400;
-    letter-spacing: 0.04em;
-    line-height: 0.82;
+    letter-spacing: 0.01em;
+    line-height: 0.75;
     text-transform: uppercase;
     visibility: hidden;
     pointer-events: none;
@@ -401,7 +401,7 @@ canvas#field {
     padding: 12px 0 12px 40px;
     position: relative;
     font-size: 0.88rem;
-    color: rgba(255,255,255,0.5);
+    color: rgba(255,255,255,1);
     line-height: 1.6;
 }
 
@@ -678,7 +678,7 @@ canvas#field {
         grid-column: 1;
         grid-row: 2;
         font-size: clamp(3.5rem, 18vw, 5rem);
-        letter-spacing: 0.2em;
+        letter-spacing: 0.01em;
     }
     .hero-sub {
         grid-column: 1;
@@ -912,7 +912,7 @@ function buildTextMask() {
   titlePageCenterY = rect.top + rect.height / 2 + scrollY;
 
   const fontSize = parseFloat(getComputedStyle(spacer).fontSize);
-  const lh = fontSize * 0.82; // match CSS line-height
+  const lh = fontSize * 0.75; // match CSS line-height
   const lines = ['VIBE', 'LIVE', 'CLUB'];
 
   const fontStr = `400 ${fontSize}px 'Mogra', cursive, sans-serif`;
