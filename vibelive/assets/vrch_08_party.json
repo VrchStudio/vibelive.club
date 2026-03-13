@@ -1,0 +1,20 @@
+{
+  "event_name": "Vibe Live Club Human x OpenClaw Co-Creation Party",
+  "host_id": "vrch-08",
+  "console_url": "https://vrch-08.vrch.ai/console",
+  "viewer_url": "https://vrch-08.vrch.ai/viewer",
+  "ws_base_url": "wss://vrch-08.vrch.ai/vrch-ws/",
+  "channels": {
+    "prompt": 1,
+    "image": 2,
+    "status_workflow_console": 8
+  },
+  "prompt_defaults": {
+    "ai_enhancement": true,
+    "style": "base"
+  },
+  "notes": {
+    "camera_source": "Open the Image Sender pane on a device at the venue, switch to Camera mode, and grant camera permission.",
+    "operator_goal": "Capture the live crowd mood, summarize the vibe briefly, and steer the AIVJ visuals with short English prompts."
+  }
+}
