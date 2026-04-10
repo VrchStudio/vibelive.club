@@ -241,48 +241,6 @@ canvas#field {
     93% { opacity: 0.12; }
 }
 
-/* ═══ MARQUEE STRIP ═══ */
-.marquee-strip {
-    display: block;
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%;
-    z-index: 20;
-    background: rgba(6,1,15,0.88);
-    overflow: hidden;
-    white-space: nowrap;
-    padding: 14px 0;
-    text-decoration: none;
-    cursor: pointer;
-    border-bottom: 1px solid rgba(255,20,147,0.12);
-}
-
-.marquee-track {
-    display: inline-block;
-    animation: marqueeScroll 30s linear infinite;
-    will-change: transform;
-}
-
-.marquee-track span {
-    display: inline-block;
-    padding: 0 42px;
-    font-family: var(--mono);
-    font-size: 0.8rem;
-    color: rgba(255,20,147,0.5);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-}
-
-.marquee-track .sep {
-    color: rgba(163,255,18,0.35);
-    padding: 0 8px;
-}
-
-@keyframes marqueeScroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-}
-
 /* ═══ CONTENT ═══ */
 .page {
     position: relative;
@@ -290,7 +248,6 @@ canvas#field {
     max-width: 1080px;
     margin: 0 auto;
     padding: 0 48px;
-    padding-top: 60px;
 }
 
 /* ═══ HERO — Magazine Cover Layout ═══ */
@@ -447,107 +404,6 @@ canvas#field {
     margin-bottom: 54px;
 }
 
-/* ═══ EVENT DETAILS BLOCK ═══ */
-.event-section { scroll-margin-top: 48px; }
-
-.event-block {
-    padding: 48px 42px;
-    border: 1px solid rgba(255,20,147,0.1);
-    position: relative;
-    overflow: hidden;
-    background: var(--panel);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-}
-
-.event-block::before {
-    content: '';
-    position: absolute;
-    top: -1px; left: 42px;
-    width: 72px; height: 2px;
-    background: var(--accent);
-    opacity: 0.3;
-}
-
-.event-tag {
-    font-family: var(--mono);
-    font-size: 0.72rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: rgba(255,227,71,0.55);
-    margin-bottom: 16px;
-}
-
-.ev-title {
-    font-family: var(--serif);
-    font-weight: 400;
-    font-size: clamp(2.1rem, 5.5vw, 3.2rem);
-    letter-spacing: -0.01em;
-    line-height: 1.1;
-    color: rgba(255,255,255,0.92);
-}
-
-.ev-date {
-    font-family: var(--mono);
-    font-size: 0.95rem;
-    color: rgba(255,227,71,0.6);
-    margin-top: 12px;
-    letter-spacing: 0.04em;
-}
-
-.ev-desc {
-    font-size: 1.02rem;
-    color: rgba(255,255,255,0.5);
-    margin-top: 12px;
-    line-height: 1.7;
-    max-width: 720px;
-}
-
-.ev-upcoming {
-    margin-top: 36px;
-    padding-top: 27px;
-    border-top: 1px solid rgba(255,20,147,0.06);
-    display: flex;
-    flex-wrap: wrap;
-    gap: 9px 48px;
-}
-
-.ev-upcoming span {
-    font-size: 0.92rem;
-    color: rgba(255,255,255,0.3);
-}
-
-.ev-upcoming .ev-d {
-    color: rgba(163,255,18,0.55);
-    font-weight: 500;
-}
-
-.ev-stream {
-    margin-top: 36px;
-    padding-top: 27px;
-    border-top: 1px solid rgba(255,20,147,0.06);
-}
-
-.ev-stream a {
-    display: inline-block;
-    padding: 15px 36px;
-    font-size: 0.92rem;
-    font-weight: 500;
-    text-decoration: none;
-    color: rgba(255,255,255,0.55);
-    border: 1px solid rgba(255,20,147,0.18);
-    border-radius: 0;
-    transition: color 0.3s, border-color 0.3s, background 0.3s;
-    position: relative;
-    overflow: hidden;
-}
-
-.ev-stream a:hover {
-    color: rgba(255,255,255,0.9);
-    border-color: var(--accent);
-    background: rgba(255,20,147,0.06);
-}
-
 /* ═══ PROJECTS ═══ */
 .proj-grid {
     display: grid;
@@ -595,50 +451,6 @@ canvas#field {
     font-size: 0.95rem;
     color: rgba(255,255,255,0.45);
     line-height: 1.6;
-}
-
-/* ═══ CONNECT ═══ */
-.connect-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 42px;
-}
-
-.cg-label {
-    font-family: var(--mono);
-    font-size: 0.72rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: rgba(255,227,71,0.35);
-    margin-bottom: 18px;
-}
-
-.cg-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-}
-
-.cg-links a,
-.cg-links span {
-    display: inline-block;
-    padding: 14px 30px;
-    font-size: 0.95rem;
-    color: rgba(255,255,255,0.45);
-    text-decoration: none;
-    border: 1px solid rgba(255,20,147,0.1);
-    border-radius: 0;
-    background: var(--panel);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    transition: color 0.3s, border-color 0.3s, background 0.3s;
-    cursor: pointer;
-}
-
-.cg-links a:hover {
-    color: rgba(255,255,255,0.85);
-    border-color: var(--accent);
-    background: rgba(255,20,147,0.06);
 }
 
 /* ═══ FOOTER ═══ */
@@ -695,10 +507,9 @@ canvas#field {
 
 @media (max-width: 600px) {
     html { font-size: 18px; }
-    .page { padding: 0 24px; padding-top: 36px; }
+    .page { padding: 0 24px; }
     .proj-grid { grid-template-columns: 1fr; gap: 1px; }
     .section { padding: 60px 0; }
-    .event-block { padding: 28px 20px; }
     .wire-shape { display: none; }
     .data-stream { display: none; }
 }
@@ -707,22 +518,6 @@ canvas#field {
 <body>
 
 <canvas id="field"></canvas>
-
-<!-- ═══ MARQUEE STRIP ═══ -->
-<a href="#event-details" class="marquee-strip">
-    <div class="marquee-track">
-        <span>Next Vibe Session &mdash; Feb 22 Sat 8PM (UTC+8) &mdash; Open Mic Vibe Night</span>
-        <span class="sep">&#x25C8;</span>
-        <span>Mar 1 Sat 8PM &mdash; AI x Music Jam</span>
-        <span class="sep">&#x25C8;</span>
-        <span>Mar 8 Sat 8PM &mdash; Generative Visuals Workshop</span>
-        <span>Next Vibe Session &mdash; Feb 22 Sat 8PM (UTC+8) &mdash; Open Mic Vibe Night</span>
-        <span class="sep">&#x25C8;</span>
-        <span>Mar 1 Sat 8PM &mdash; AI x Music Jam</span>
-        <span class="sep">&#x25C8;</span>
-        <span>Mar 8 Sat 8PM &mdash; Generative Visuals Workshop</span>
-    </div>
-</a>
 
 <!-- ═══ COLOR WASH ═══ -->
 <div class="color-wash">
@@ -777,29 +572,16 @@ canvas#field {
         </div>
     </section>
 
-    <section class="section event-section" id="event-details">
-        <div class="section-label">Upcoming</div>
-        <div class="event-block">
-            <div class="event-tag">Next Session</div>
-            <div class="ev-title">Open Mic Vibe Night</div>
-            <div class="ev-date">Feb 22 Sat &middot; 8 PM UTC+8</div>
-            <div class="ev-desc">Bring your own vibe &mdash; music, visuals, code, agents, anything. Humans and AI agents welcome.</div>
-            <div class="ev-upcoming">
-                <span><span class="ev-d">Mar 1</span> AI x Music Jam</span>
-                <span><span class="ev-d">Mar 8</span> Generative Visuals Workshop</span>
-            </div>
-            <div class="ev-stream">
-                <a href="https://www.youtube.com/@vibeliveclub" target="_blank" rel="noopener">&#9654; Watch on YouTube Live</a>
-            </div>
-        </div>
-    </section>
-
     <section class="section">
         <div class="section-label">Projects</div>
         <div class="proj-grid">
-            <a class="proj-card" href="https://vibingart.com" target="_blank" rel="noopener">
+            <a class="proj-card" href="https://vibing.art/" target="_blank" rel="noopener">
                 <div class="proj-name">Vibing Art</div>
                 <div class="proj-desc">Generative art meets live performance. Create and share visual vibes in real time.</div>
+            </a>
+            <a class="proj-card" href="https://tastes.md/" target="_blank" rel="noopener">
+                <div class="proj-name">TASTES.md</div>
+                <div class="proj-desc">A markdown-first way to express taste, vibe, and cultural references across humans and agents.</div>
             </a>
             <a class="proj-card" href="https://strudel.vibelive.club/" target="_blank" rel="noopener">
                 <div class="proj-name">Strudel Vibelive</div>
@@ -813,27 +595,6 @@ canvas#field {
                 <div class="proj-name">ComfyUI Web Viewer</div>
                 <div class="proj-desc">Real-time AI-generated interactive art, powered by ComfyUI custom nodes by vrch.ai.</div>
             </a>
-        </div>
-    </section>
-
-    <section class="section">
-        <div class="section-label">Connect</div>
-        <div class="connect-grid">
-            <div>
-                <div class="cg-label">Social</div>
-                <div class="cg-links">
-                    <a href="https://www.instagram.com/vibelive.club" target="_blank" rel="noopener">Instagram</a>
-                    <a href="https://www.xiaohongshu.com/user/profile/vibeliveclub" target="_blank" rel="noopener">Xiaohongshu</a>
-                </div>
-            </div>
-            <div>
-                <div class="cg-label">Community</div>
-                <div class="cg-links">
-                    <a href="https://discord.gg/vibeliveclub" target="_blank" rel="noopener">Discord</a>
-                    <span>Feishu Group</span>
-                    <span>WeChat Group</span>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -883,22 +644,31 @@ const ctx = canvas.getContext('2d');
 let w, h, dpr, time = 0;
 
 // ── Text mask (offscreen) ──
+const TITLE_LINES = ['VIBE', 'LIVE', 'CLUB'];
 const maskCanvas = document.createElement('canvas');
 const maskCtx = maskCanvas.getContext('2d', { willReadFrequently: true });
 let maskData = null;
 let maskW = 0, maskH = 0;
 let titlePageCenterX = 0, titlePageCenterY = 0;
 let maskPageOriginX = 0, maskPageOriginY = 0;
+let titleFontStr = '';
+let titleFontSize = 0;
+let titleLineHeight = 0;
+let titlePadX = 0, titlePadY = 0;
+let titleJustifyW = 0;
 
-function drawJustifiedWord(ctx, word, x, y, targetWidth) {
+function drawJustifiedWord(ctx, word, x, y, targetWidth, method = 'fillText') {
   const chars = word.split('');
-  if (chars.length <= 1) { ctx.fillText(word, x, y); return; }
+  if (chars.length <= 1) {
+    ctx[method](word, x, y);
+    return;
+  }
   const charWidths = chars.map(c => ctx.measureText(c).width);
   const totalCharWidth = charWidths.reduce((a, b) => a + b, 0);
   const gap = (targetWidth - totalCharWidth) / (chars.length - 1);
   let cx = x;
   for (let i = 0; i < chars.length; i++) {
-    ctx.fillText(chars[i], cx, y);
+    ctx[method](chars[i], cx, y);
     cx += charWidths[i] + gap;
   }
 }
@@ -911,20 +681,18 @@ function buildTextMask() {
   titlePageCenterX = rect.left + rect.width / 2;
   titlePageCenterY = rect.top + rect.height / 2 + scrollY;
 
-  const fontSize = parseFloat(getComputedStyle(spacer).fontSize);
-  const lh = fontSize * 0.75; // match CSS line-height
-  const lines = ['VIBE', 'LIVE', 'CLUB'];
-
-  const fontStr = `400 ${fontSize}px 'Mogra', cursive, sans-serif`;
-  maskCtx.font = fontStr;
+  titleFontSize = parseFloat(getComputedStyle(spacer).fontSize);
+  titleLineHeight = titleFontSize * 0.75; // match CSS line-height
+  titleFontStr = `400 ${titleFontSize}px 'Mogra', cursive, sans-serif`;
+  maskCtx.font = titleFontStr;
 
   // Use DOM width (includes CSS letter-spacing) as justify target
-  const padX = Math.ceil(fontSize * 0.15);
-  const padY = Math.ceil(fontSize * 0.15);
-  const justifyW = Math.ceil(rect.width);
+  titlePadX = Math.ceil(titleFontSize * 0.15);
+  titlePadY = Math.ceil(titleFontSize * 0.15);
+  titleJustifyW = Math.ceil(rect.width);
 
-  maskW = justifyW + padX * 2;
-  maskH = Math.ceil(lh * lines.length + fontSize * 0.2) + padY * 2;
+  maskW = titleJustifyW + titlePadX * 2;
+  maskH = Math.ceil(titleLineHeight * TITLE_LINES.length + titleFontSize * 0.2) + titlePadY * 2;
   maskCanvas.width = maskW;
   maskCanvas.height = maskH;
 
@@ -933,14 +701,14 @@ function buildTextMask() {
 
   maskCtx.fillStyle = '#000';
   maskCtx.fillRect(0, 0, maskW, maskH);
-  maskCtx.font = fontStr;
+  maskCtx.font = titleFontStr;
   maskCtx.textAlign = 'left';
   maskCtx.textBaseline = 'top';
   maskCtx.fillStyle = '#fff';
 
   // Draw each word justified to the same width
-  for (let i = 0; i < lines.length; i++) {
-    drawJustifiedWord(maskCtx, lines[i], padX, padY + i * lh, justifyW);
+  for (let i = 0; i < TITLE_LINES.length; i++) {
+    drawJustifiedWord(maskCtx, TITLE_LINES[i], titlePadX, titlePadY + i * titleLineHeight, titleJustifyW);
   }
 
   const imgData = maskCtx.getImageData(0, 0, maskW, maskH);
@@ -983,10 +751,33 @@ function getTitleViewportCenter() {
   };
 }
 
+function drawTitleAura(breath) {
+  const scrollY = window.scrollY || window.pageYOffset;
+  const drawX = maskPageOriginX;
+  const drawY = maskPageOriginY - scrollY;
+
+  ctx.save();
+  ctx.globalAlpha = 0.003;
+  ctx.font = titleFontStr;
+  ctx.textAlign = 'left';
+  ctx.textBaseline = 'top';
+
+  ctx.shadowBlur = titleFontSize * 0.08;
+  ctx.shadowColor = 'rgb(255, 20, 147)';
+  ctx.fillStyle = 'rgb(255, 255, 255)';
+
+  for (let i = 0; i < TITLE_LINES.length; i++) {
+    const y = drawY + titlePadY + i * titleLineHeight;
+    drawJustifiedWord(ctx, TITLE_LINES[i], drawX + titlePadX, y, titleJustifyW);
+  }
+
+  ctx.restore();
+}
+
 // ── Particles ──
 const particles = [];
 const BG_COUNT = 3000;
-const TITLE_COUNT = 2200;
+const TITLE_COUNT = 3200;
 
 function initParticle(p, scatter, forTitle) {
   if (forTitle) {
@@ -1060,6 +851,8 @@ function animate() {
   const breath = titleBreath();
   const titleVC = getTitleViewportCenter();
 
+  drawTitleAura(breath);
+
   const noiseOffX = Math.sin(time * 0.3) * 50;
   const noiseOffY = Math.cos(time * 0.23) * 50;
 
@@ -1090,12 +883,12 @@ function animate() {
 
     const titleAlphaMod = 0.5 + breath * 0.5;
     const baseAlpha = inText ? (0.92 * titleAlphaMod) : 0.4;
-    const alpha = lifeFade * baseAlpha;
+    const alpha = Math.min(lifeFade * baseAlpha * (inText ? 1.15 : 1), 1);
 
     const hue = p.hue + n2 * 25 + hueShift;
-    const sat = inText ? (65 + Math.abs(n) * 30) : (45 + Math.abs(n) * 35);
-    const lit = inText ? (65 + Math.abs(n2) * 20) : (45 + Math.abs(n2) * 22);
-    const lineW = inText ? 1.6 : 0.9;
+    const sat = inText ? (72 + Math.abs(n) * 26) : (45 + Math.abs(n) * 35);
+    const lit = inText ? (72 + Math.abs(n2) * 18) : (45 + Math.abs(n2) * 22);
+    const lineW = inText ? 2.1 : 0.9;
 
     if (alpha > 0.005) {
       ctx.beginPath();
